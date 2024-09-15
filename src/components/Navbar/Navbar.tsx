@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Flex } from "@chakra-ui/react";
 import "./Navbar.scss";
@@ -52,9 +53,13 @@ const NavBar: React.FC = () => {
     <Flex className="wrapper-navbar">
       <nav className="navbar">
         <div className="logo-navbar">
-          <Link href="/">
-            <img src="./logo/logo.svg" alt="logo" />
-          </Link>
+          <Image
+            src={"/Navbar/gorilla.svg"}
+            width={48}
+            height={50}
+            className="Kongwellogo"
+            alt={"Kongwellogo"}
+          />
         </div>
 
         <div className={`links-navbar-center ${isActive ? "active" : ""}`}>
