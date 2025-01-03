@@ -2,9 +2,10 @@
 "use client";
 
 import React from "react";
-import { Button, Form, Input, InputNumber } from "antd";
+import { Button, Form, Input } from "antd";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import Image from "next/image";
 import "./Contact.scss";
 
 const layout = {
@@ -25,7 +26,7 @@ const validateMessages = {
 
 const onFinish = (values: any) => {
   console.log("Form Values:", values);
-  // You can handle form submission here (e.g., send data to an API)
+  // Handle form submission (e.g., send data to an API)
 };
 
 export default function Contact() {
@@ -34,7 +35,13 @@ export default function Contact() {
       <Navbar />
       <section className="FormSection">
         <div className="ImageSection">
-          <img src="/path-to-your-image.jpg" alt="Contact Us" />
+          <Image
+            src="/ContactComponent/contactUs.jpeg"
+            alt="Contact Us"
+            width={600} // Desired width
+            height={600} // Desired height
+            className="contact-image"
+          />
         </div>
         <div className="ContactForm">
           <Form
@@ -42,6 +49,7 @@ export default function Contact() {
             name="contact-form"
             onFinish={onFinish}
             validateMessages={validateMessages}
+            className="ant-form-custom"
           >
             <Form.Item
               name={["user", "name"]}
