@@ -4,10 +4,9 @@ import React, { useRef } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import "./AboutUs.scss";
-// Removed unused import: Content from "antd/es/layout/layout"
 
 export default function AboutUs() {
-  const containerRefs = useRef([]); // Initialize containerRefs
+  const containerRefs = useRef([]);
 
   const milestones = [
     { title: "Jacob", content: "Hi, my name is Jacob" },
