@@ -1,210 +1,242 @@
+@import 'typeface-poppins';
+@import 'typeface-raleway';
+
 .wrapper-navbar {
-    padding: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  z-index: 100000;
+  background-color: #132A35;
+
+  .wrapper-assist-navbar {
+    width: 1400px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    top: 0;
-    z-index: 100000;
-    background-color: #2E4245;
-    .wrapper-assist-navbar{
-      width: 1400px;
-      display: flex;
-      justify-content: space-between;
+    justify-content: space-between;
+  }
+}
+
+.navbar {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  background-color: #132A35;
+  padding: 0 2rem 0 2rem;
+}
+
+.links-navbar-center {
+  ul {
+    list-style: none;
+    display: flex;
+
+    li {
+      a {
+        position: relative;
+        margin: 0 20px;
+        font-size: 20px;
+        font-family: 'Raleway', sans-serif;
+        text-decoration: none;
+        color: #d4d4d4;
+        font-weight: 400;
+        overflow: hidden;
+
+        &::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          bottom: -5px;
+          left: 0;
+          background-color: #d4d4d4;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover::after {
+          transform: scaleX(1);
+        }
+      }
+
+      &.active a {
+        color: #d4d4d4;
+        &::after {
+          background-color: #d4d4d4;
+          transform: scaleX(1);
+        }
+      }
     }
   }
-  
-  
-  .navbar {
+}
+
+.nav-menu {
+  position: fixed;
+  right: -200%;
+  top: 0;
+  background: #ffffff;
+  backdrop-filter: blur(10px);
+  width: 250px;
+  height: 786px;
+  transition: 0.3s;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  padding: 100px 0 0 30px;
+  z-index: 9999;
+
+  ul {
+    margin-top: 50px;
+    list-style: none;
+
+    li {
+      margin: 10px 0;
+
+      a {
+        position: relative;
+        margin: 10px 0;
+        font-size: 20px;
+        font-family: 'Raleway', sans-serif;
+        text-decoration: none;
+        color: #2D6681;
+        font-weight: 600;
+        overflow: hidden;
+
+        // Create underline using ::after for hamburger menu
+        &::after {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 2px;
+          bottom: -5px;
+          left: 0;
+          background-color: #2D6681;
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform 0.3s ease;
+        }
+
+        &:hover::after {
+          transform: scaleX(1); // Expand underline on hover
+        }
+      }
+
+      &.active a {
+        color: #2D6681;
+        &::after {
+          background-color: #2D6681; // Change underline color for active state
+          transform: scaleX(1); // Keep underline for active links
+        }
+      }
+
+      &:hover a {
+        color: #2D6681;
+      }
+    }
+  }
+
+  &.active {
+    right: 0;
+    overflow: hidden;
+  }
+}
+
+
+.login-container,
+.login-container-inside {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+
+  button {
+    color: #000000;
+    font-family: 'Raleway', sans-serif;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.3s;
+    font-weight: 500;
+    padding: 0;
+
+    &:hover {
+      color: #bbbbbb !important;
+    }
+  }
+
+  h1 {
+    color: #fff;
+  }
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+  z-index: 1001 !important;
+
+  &.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  &.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  &.active .bar:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+  }
+}
+
+.apply-hamburger {
+  width: 35px;
+  display: none;
+  z-index: 10000 !important;
+}
+
+.bar {
+  display: block;
+  width: 35px;
+  height: 5px;
+  margin: 5px auto;
+  transition: all 0.3s ease-in-out;
+  background-color: #d4d4d4;
+  border-radius: 30px;
+
+  &.active {
+    background-color: #20485B;
+  }
+}
+
+@media (max-width: 1400px) {
+  .wrapper-navbar {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    background-color: #2E4245;
   }
-  
-  .links-navbar-center {
-    ul {
-      list-style: none;
-      display: flex;
-  
-      li {
-        a {
-          margin: 0 20px;
-          font-size: 20px;
-          font-family: "DM Sans", sans-serif;
-          text-decoration: none;
-          color: #000000;
-          font-weight: 500;
-        }
-        &:hover{
-          transform: scale(1.07);
-        }
-        &.active {
-          a {
-            color: #000000;
-          }
-        }
-      }
-    }
-  }
-  
-  .nav-menu {
-    position: fixed;
-    right: -200%;
-    top: 0;
-    background: rgb(96,105,110);
-background: linear-gradient(180deg, rgba(96,105,110,1) 9%, rgba(39,42,43,1) 90%);
-    backdrop-filter: blur(10px);
-    width: 360px;
-    height: 786px;
-    transition: 0.3s;
-    border-bottom-left-radius: 43px;
-    border-top-left-radius: 43px;
-    padding: 100px 0 0 30px;
-    z-index: 9999;
 
-  
-    ul {
-      margin-top: 50px;
-      list-style: none;
-      li {
-        margin: 10px 0;
-        a {
-          margin: 10px 0;
-          font-size: 20px;
-          font-family: "DM Sans", sans-serif;
-          text-decoration: none;
-          color: #000000;
-          transition: color 0.3s ease;
-          font-weight: 500;
-        }
-  
-        &.active {
-          a {
-            color: #000000;
-          }
-        }
-  
-        &:hover {
-          a {
-            color: #000000;
-          }
-        }
-      }
-    }
-  
-    &.active {
-      right: 0;
-      overflow: hidden;
-  
-      ul {
-        li {
-          a {
-            &:hover {
-              transform: scale(1);
-            }
-          }
-        }
-      }
-    }
+  .wrapper-assist-navbar {
+    width: 100% !important;
+    padding: 0 20px;
   }
-  
-  .active {
-    color: #74471f;
-  }
-  
-  .login-container,
-  .login-container-inside {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    gap: 20px;
-    button {  
-      color: #000000;
-      font-family: "DM Sans", sans-serif;
-      font-size: 20px;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-      transition: color 0.3s;
-      font-weight: 500;
-      padding: 0;
-  
-      &:hover {
-        color: #bbbbbb !important;
-      }
-    }
-  
-    h1 {
-      color: #fff;
-    }
-  }
-  
-  
+
   .hamburger {
-    display: none;
-    cursor: pointer;
-    z-index: 1001 !important;
-  
-    &.active .bar:nth-child(2) {
-      opacity: 0;
-    }
-  
-    &.active .bar:nth-child(1) {
-      transform: translateY(8px) rotate(45deg);
-    }
-  
-    &.active .bar:nth-child(3) {
-      transform: translateY(-12px) rotate(-45deg);
-    }
-  }
-  
-  .apply-hamburger {
-    width: 35px;
-    display: none;
-    z-index: 10000 !important;
-  }
-  
-  .bar {
     display: block;
-    width: 35px;
-    height: 5px;
-    margin: 5px auto;
-    transition: all 0.3s ease-in-out;
-    background-color: #000000;
-    border-radius: 30px;
-  
-    &.active {
-      background-color: #fff;
-    }
   }
-  
-  @media (max-width: 1400px) {
-    .wrapper-navbar{
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-    }
-    .wrapper-assist-navbar {
-      width: 100% !important;
-      padding: 0 20px;
-    }
-    .hamburger {
-      display: block;
-    }
-  
-    .apply-hamburger {
-      display: block;
-    }
-  
-    .login-container,
-    .links-navbar-center {
-      display: none;
-    }
+
+  .apply-hamburger {
+    display: block;
   }
-  @media (min-width: 1400px) {
-    .nav-menu {
-      display: none;
-    }
+
+  .login-container,
+  .links-navbar-center {
+    display: none;
   }
+}
+
+@media (min-width: 1400px) {
+  .nav-menu {
+    display: none;
+  }
+}

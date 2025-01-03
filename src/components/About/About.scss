@@ -1,0 +1,134 @@
+.containerSection {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding: 4rem;
+  box-sizing: border-box;
+  background: #132A35;
+
+  .firstRow,
+  .secondRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    box-sizing: border-box;
+
+    h2 {
+      font-size: 1rem;
+      width: 100%;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .container {
+    flex: 0 0 calc(50% - 2rem); /* Adjusted for gap */
+    box-sizing: border-box;
+    background: #ededed;
+    padding: 1rem;
+    margin: 0.5rem;
+    border-radius: 1rem;
+    color: #132A35;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Slight downward offset */
+    transition: opacity 0.6s ease, transform 0.6s ease; /* Transition effects */
+    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+
+    /* Box Shadow */
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+
+    /* "Read More" Button Styles */
+    .readMoreButton {
+      background-color: #ededed;
+      color: #000000;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      text-align: left;
+      justify-content: left;
+      display: flex;
+      text-decoration: none;
+      font-size: 0.9rem;
+      overflow: hidden;
+      transition: background-color 0.3s ease;
+    }
+
+    /* If using <a> tags, ensure they look like buttons */
+    a.readMoreButton {
+      display: inline-block;
+    }
+
+    /* Show class triggers the fade-in */
+    &.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Assign different transition delays based on container number */
+    &.container1.show {
+      transition-delay: 0.3s;
+    }
+
+    &.container2.show {
+      transition-delay: 0.6s;
+    }
+
+    &.container3.show {
+      transition-delay: 0.9s;
+    }
+
+    &.container4.show {
+      transition-delay: 1.2s;
+    }
+  }
+
+  /* Optional: Additional container-specific styles */
+  .container1 {}
+  .container2 {}
+  .container3 {}
+  .container4 {}
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .containerSection {
+    padding: 2rem;
+
+    .firstRow,
+    .secondRow {
+      flex-direction: column;
+      align-items: center;
+      /* On mobile, gap remains vertical spacing between stacked containers */
+    }
+
+    .container {
+      flex: 1 1 100%;
+      max-width: 100%;
+      transition-delay: 0s !important; /* Remove delays on mobile for better UX */
+      opacity: 0; /* Reset to hidden */
+      transform: translateY(20px); /* Reset position */
+      box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+    }
+
+    .container.show {
+      opacity: 1;
+      transform: translateY(0);
+      transition-delay: 0s; /* No delay on mobile */
+    }
+  }
+}

@@ -1,0 +1,39 @@
+@import 'antd/dist/reset.css'; 
+@import 'typeface-raleway';
+@import 'typeface-poppins';
+
+.container {
+    margin: 0;
+    height: 180px;
+    color: #ffffff;
+    text-align: left;
+    background: #132A35;
+    padding: 0 20rem 0 4rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    color: #d4d4d4;
+    font-weight: 300;
+    letter-spacing: 0.02rem;
+
+    h2 {
+      border-bottom: 2px solid #d4d4d4; 
+      width: 10rem;
+    }
+  }
+
+  // Increase specificity and apply !important to override default styles
+.ant-carousel .slick-prev, 
+.ant-carousel .slick-next {
+  padding: 0 2rem !important; // Adjust padding
+  z-index: 1;
+}
+
+.ant-carousel .slick-prev {
+  left: 30px !important; // Adjust the position of the left arrow
+}
+
+.ant-carousel .slick-next {
+  right: 30px !important; // Adjust the position of the right arrow
+}
+
+  

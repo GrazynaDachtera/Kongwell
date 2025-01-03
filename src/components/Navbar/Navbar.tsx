@@ -41,12 +41,12 @@ const NavBar: React.FC = () => {
   }, [isActive, closeMenu]);
 
   const menuItems = [
-    { label: "Home", path: "/" },
-    { label: "About Us", path: "/About" },
-    { label: "Service", path: "/Service" },
-    { label: "Blog", path: "/Blog" },
-    { label: "Contact", path: "/Contact" },
-    { label: "Social Media", path: "/Social" },
+    { label: "home", path: "/" },
+    { label: "about us", path: "/AboutUs" },
+    { label: "service", path: "/Service" },
+    { label: "blog", path: "/Blog" },
+    { label: "contact", path: "/Contact" },
+    { label: "social media", path: "/Social" },
   ];
 
   return (
@@ -55,8 +55,8 @@ const NavBar: React.FC = () => {
         <div className="logo-navbar">
           <Image
             src={"/Navbar/gorilla.svg"}
-            width={48}
-            height={50}
+            width={98}
+            height={100}
             className="Kongwellogo"
             alt={"Kongwellogo"}
           />
