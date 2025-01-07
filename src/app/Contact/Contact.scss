@@ -1,94 +1,119 @@
 .FormSection {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #132A35;
-    flex-direction: row;
-    overflow: hidden;
-    padding: 4rem;
-  
-    .ImageSection {
-      width: 100%;
-  
-      .contact-image {
-        max-width: 100%;
-        height: auto;
-        border-radius: 1rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #132A35;
+  flex-direction: row;
+  overflow: hidden;
+  padding: 4rem;
+
+  .ImageSection {
+    width: 50%; /* Adjust as needed */
+
+    .contact-image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-  
+  }
+
+  .ContactTitle {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    color: #d4d4d4;
+    padding-bottom: 1rem;
+    letter-spacing: 0.02rem;
+    font-weight: 300;
+    width: 50%; 
+
+    h2 {
+      font-family: 'Raleway', sans-serif;
+      font-size: 4rem;
+      color: #d4d4d4;
+      letter-spacing: 0.1rem;
+      font-weight: 300;
+    }
+
     .ContactForm {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  
+      max-width: 80%;
+      display: block; /* Changed from flex to block */
+      text-align: left; /* Ensure left alignment */
+
       .ant-form {
-        padding: 2rem;
-        border-radius: 8px;
         width: 100%;
+        border-radius: 8px;
         color: #d4d4d4;
-  
+
         * {
           color: #d4d4d4;
         }
-  
+
         .ant-form-item-label > label {
-          color: #d4d4d4;
-          padding-bottom: 8px;
-          line-height: 2;
+          padding-bottom: 0.01rem;
+          line-height: 1.5; /* Adjusted line height for better spacing */
           font-weight: 500;
           color: #d4d4d4;
           font-family: 'Raleway', sans-serif;
           font-size: 1rem;
         }
-  
+
         .ant-input,
         .ant-input-number,
         .ant-textarea {
           background-color: #2c3e50;
           border: 1px solid #34495e;
           color: #d4d4d4;
-          height: 2.4rem;
+          width: 100%; /* Ensure inputs take full width */
         }
-  
+
         .ant-input::placeholder,
         .ant-input-number::placeholder,
         .ant-textarea::placeholder {
-          color: #d4d4c7;
           font-weight: 300;
           color: #d4d4d4;
           font-family: 'Raleway', sans-serif;
         }
-  
+
         .ant-form-item-label {
-          min-height: 40px;
+          margin-bottom: 0.2rem; /* Reduced min-height */
         }
-  
+
         .ant-btn-primary {
-          background-color: orange;
-          border-color: #2980b9;
+          background-color: rgb(186, 125, 10);
           color: #d4d4d4;
-          width: 100%;
+          width: 8rem; /* Button spans full width */
+          height: 4rem;
+          border-radius: 8rem;
+          font-family: 'Raleway', sans-serif;
+          font-size: 1rem;
         }
-  
+
         .ant-btn-primary:hover,
         .ant-btn-primary:focus {
           background-color: #2980b9;
           border-color: #1c5980;
         }
       }
-  
-      @media (max-width: 768px) {
-        .ant-form {
-          padding: 1rem;
-        }
-  
-        .ant-form-item-label {
-          min-height: 30px;
-        }
+    }
+
+    @media (max-width: 768px) {
+      .ant-form {
+        padding: 1rem;
+      }
+
+      .ant-form-item-label {
+        margin-bottom: 2px; /* Adjusted for smaller screens */
       }
     }
   }
-  
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .ImageSection,
+    .ContactTitle {
+      width: 100%;
+    }
+  }
+}

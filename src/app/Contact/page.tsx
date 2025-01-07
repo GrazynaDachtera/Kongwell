@@ -1,4 +1,3 @@
-// Contact.tsx
 "use client";
 
 import React from "react";
@@ -7,11 +6,6 @@ import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Image from "next/image";
 import "./Contact.scss";
-
-const layout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
 
 const validateMessages = {
   required: "${label} is required!",
@@ -38,51 +32,57 @@ export default function Contact() {
           <Image
             src="/ContactComponent/contactUs.jpeg"
             alt="Contact Us"
-            width={600} // Desired width
-            height={600} // Desired height
+            width={500} // Desired width
+            height={500} // Desired height
             className="contact-image"
           />
         </div>
-        <div className="ContactForm">
-          <Form
-            {...layout}
-            name="contact-form"
-            onFinish={onFinish}
-            validateMessages={validateMessages}
-            className="ant-form-custom"
-          >
-            <Form.Item
-              name={["user", "name"]}
-              label="Name"
-              rules={[{ required: true }]}
+        <div className="ContactTitle">
+          <h2>Contact Us</h2>
+          <p>
+            Do you want to get in touch? Give us a call or write us an email:
+          </p>
+          <div className="ContactForm">
+            <Form
+              layout="vertical" // Changed to vertical layout
+              name="contact-form"
+              onFinish={onFinish}
+              validateMessages={validateMessages}
+              className="ant-form-custom"
             >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name={["user", "lastname"]}
-              label="Last name"
-              rules={[{ required: true }]}
-            >
-              <Input />
-            </Form.Item>
-            <Form.Item
-              name={["user", "email"]}
-              label="Email"
-              rules={[{ type: "email", required: true }]}
-            >
-              <Input />
-            </Form.Item>
+              <Form.Item
+                name={["user", "name"]}
+                label="Name"
+                rules={[{ required: true }]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                name={["user", "lastname"]}
+                label="Last name"
+                rules={[{ required: true }]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                name={["user", "email"]}
+                label="Email"
+                rules={[{ type: "email", required: true }]}
+              >
+                <Input />
+              </Form.Item>
 
-            <Form.Item name={["user", "message"]} label="Message">
-              <Input.TextArea />
-            </Form.Item>
+              <Form.Item name={["user", "message"]} label="Message">
+                <Input.TextArea />
+              </Form.Item>
 
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-              <Button type="primary" htmlType="submit">
-                Send
-              </Button>
-            </Form.Item>
-          </Form>
+              <Form.Item>
+                <Button type="primary" htmlType="submit">
+                  Send
+                </Button>
+              </Form.Item>
+            </Form>
+          </div>
         </div>
       </section>
       <Footer />
