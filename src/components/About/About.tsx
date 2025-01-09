@@ -1,13 +1,13 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "./About.scss";
 
 const About: React.FC = () => {
-  const containerRefs = useRef<(HTMLDivElement | null)[]>([]); // Array of refs
+  const containerRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const observerOptions = {
-      threshold: 0.1, // Trigger when 10% of the container is visible
+      threshold: 0.1,
     };
 
     const observerCallback = (
@@ -17,7 +17,7 @@ const About: React.FC = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add("show");
-          observer.unobserve(entry.target); // Stop observing once shown
+          observer.unobserve(entry.target);
         }
       });
     };
@@ -55,21 +55,12 @@ const About: React.FC = () => {
         "We are committed to sustainability and have implemented various initiatives to reduce our environmental impact. From green energy solutions to eco-friendly products, we continue to invest in sustainable development practices.",
       link: "/Blog",
     },
-    {
-      title: "Customer-Centric Innovation",
-      content:
-        "We focus on customer needs and feedback to drive innovation, resulting in products and services that truly meet market demands. Our customer-centric approach has led to increased satisfaction and loyalty.",
-      link: "/Blog",
-    },
-    {
-      title: "Another Milestone",
-      content: "Some more content about this milestone.",
-      link: "/Blog",
-    },
   ];
 
   return (
     <section className="containerSection">
+      <h3>Our Milestones</h3>
+
       <div className="firstRow">
         {milestones.slice(0, 2).map((milestone, index) => (
           <div
@@ -79,27 +70,6 @@ const About: React.FC = () => {
           >
             <h2>{milestone.title}</h2>
             <p>{milestone.content}</p>
-            {/* "Read More" Button */}
-            {milestone.link ? (
-              <a href={milestone.link} className="readMoreButton">
-                Read More &gt;&gt;
-              </a>
-            ) : (
-              <button className="readMoreButton">Read More &gt;&gt;</button>
-            )}
-          </div>
-        ))}
-      </div>
-      <div className="secondRow">
-        {milestones.slice(2).map((milestone, index) => (
-          <div
-            key={index + 2}
-            className={`container container${index + 3}`}
-            ref={(el) => (containerRefs.current[index + 2] = el)}
-          >
-            <h2>{milestone.title}</h2>
-            <p>{milestone.content}</p>
-            {/* "Read More" Button */}
             {milestone.link ? (
               <a href={milestone.link} className="readMoreButton">
                 Read More &gt;&gt;

@@ -12,25 +12,25 @@
 
 .wrapper-assist-footer {
   width: 100%;
-  max-width: 1400px; // Limit the max width for larger screens
   padding: 20px;
   display: flex;
-  justify-content: center; // Center content inside wrapper-assist-footer
+  justify-content: space-between;
   align-items: center;
-  flex-direction: column; // Ensure footer content stacks correctly
+  flex-direction: column;
+  width: 100%;
 }
 
 .footer-main-container {
   width: 100%;
   background-color: #ffffff;
-  color: rgb(19, 42, 53); // Apply text color to the entire footer
+  color: rgb(19, 42, 53);
   font-family: 'Poppins', sans-serif;
 
   .footer-logo-container {
     width: 100%;
     padding: 10px 0;
     display: flex;
-    justify-content: center; // Center the logo
+    justify-content: center;
     align-items: center;
 
     .gorilla-logo {
@@ -41,36 +41,36 @@
 
   .footer-middle {
     width: 100%;
-    max-width: 1200px; // Center the footer menu section
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-
+    max-width: 1200px;
+    
     .footer-menu-container {
       width: 25%;
       display: flex;
       flex-direction: column;
-      align-items: center; // Center the menu containers
+      align-items: center;
     }
   }
 
   .footer-footer {
     width: 100%;
-    max-width: 1200px; // Center the footer bottom section
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     padding-bottom: 10px;
+    max-width: 1200px;
 
     .footer-footer-logo,
     .footer-footer-social {
       display: flex;
-      justify-content: center; // Center the logos and social links
+      justify-content: center;
       align-items: center;
     }
 
     .footer-footer-terms {
-      text-align: center; // Center any terms or footer links
+      text-align: center;
     }
   }
 }
@@ -78,12 +78,12 @@
 @media (max-width: 1000px) {
   .footer-middle {
     flex-direction: column;
-    align-items: center; // Ensure menu items are centered on smaller screens
+    align-items: center;
   }
 
   .footer-footer {
     flex-direction: column;
-    align-items: center; // Center the footer elements
+    align-items: center;
     gap: 20px;
   }
 }

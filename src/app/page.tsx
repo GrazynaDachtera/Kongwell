@@ -1,3 +1,4 @@
+// src/pages/Home.tsx
 "use client";
 
 import React from "react";
@@ -12,8 +13,10 @@ export default function Home() {
   return (
     <>
       <section className="KongwellWebsite">
-        <Navbar />
-        <Header />
+        <div className="BackgroundImage">
+          <Navbar />
+          <Header />
+        </div>
         <Slider />
         <About />
         <Footer />

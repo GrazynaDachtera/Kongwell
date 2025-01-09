@@ -3,37 +3,42 @@
 @import 'typeface-poppins';
 
 .container {
-    margin: 0;
-    height: 180px;
-    color: #ffffff;
-    text-align: left;
-    background: #132A35;
-    padding: 0 20rem 0 4rem;
+  background: #132A35;
+  padding: 4rem 10rem 4rem 10rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #d4d4d4;
+  font-weight: 300;
+  letter-spacing: 0.02rem;
+  text-align: center;
+
+  h2 {
+    border-bottom: 2px solid #d4d4d4; 
+    width: 15rem;
+    text-align: center;
+    margin: 0 auto; 
     font-family: 'Poppins', sans-serif;
-    font-size: 1rem;
-    color: #d4d4d4;
     font-weight: 300;
     letter-spacing: 0.02rem;
-
-    h2 {
-      border-bottom: 2px solid #d4d4d4; 
-      width: 10rem;
-    }
+    font-size: 2rem;
   }
 
-  // Increase specificity and apply !important to override default styles
+  p {
+    padding-top: 2rem; 
+    line-height: 1.6; 
+  }
+}
+
+
 .ant-carousel .slick-prev, 
 .ant-carousel .slick-next {
-  padding: 0 2rem !important; // Adjust padding
   z-index: 1;
 }
 
 .ant-carousel .slick-prev {
-  left: 30px !important; // Adjust the position of the left arrow
+  left: 30px !important;
 }
 
 .ant-carousel .slick-next {
-  right: 30px !important; // Adjust the position of the right arrow
+  right: 30px !important;
 }
-
-  

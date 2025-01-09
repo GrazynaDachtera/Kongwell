@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -50,57 +51,60 @@ const NavBar: React.FC = () => {
   ];
 
   return (
-    <Flex className="wrapper-navbar">
-      <nav className="navbar">
-        <div className="logo-navbar">
-          <Image
-            src={"/Navbar/gorilla.svg"}
-            width={98}
-            height={100}
-            className="Kongwellogo"
-            alt={"Kongwellogo"}
-          />
-        </div>
-
-        <div className={`links-navbar-center ${isActive ? "active" : ""}`}>
-          <ul>
-            {menuItems.map((item) => (
-              <li
-                key={item.path}
-                className={pathname === item.path ? "active" : ""}
-              >
-                <Link href={item.path} onClick={closeMenu}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="apply-hamburger" onClick={toggleMenu}>
-          <div className={`hamburger ${isActive ? "active" : ""}`}>
-            <span className={`bar ${isActive ? "active" : ""}`}></span>
-            <span className={`bar ${isActive ? "active" : ""}`}></span>
-            <span className={`bar ${isActive ? "active" : ""}`}></span>
+    <>
+      <Flex className="wrapper-navbar">
+        <nav className="navbar">
+          <div className="logo-navbar">
+            <Image
+              src={"/Navbar/gorilla.svg"}
+              width={98}
+              height={100}
+              className="Kongwellogo"
+              alt={"Kongwellogo"}
+            />
           </div>
-        </div>
 
-        <div className={`nav-menu ${isActive ? "active" : ""}`}>
-          <ul>
-            {menuItems.map((item) => (
-              <li
-                key={item.path}
-                className={pathname === item.path ? "active" : ""}
-              >
-                <Link href={item.path} onClick={closeMenu}>
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
-    </Flex>
+          <div className={`links-navbar-center ${isActive ? "active" : ""}`}>
+            <ul>
+              {menuItems.map((item) => (
+                <li
+                  key={item.path}
+                  className={pathname === item.path ? "active" : ""}
+                >
+                  <Link href={item.path} onClick={closeMenu}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="apply-hamburger" onClick={toggleMenu}>
+            <div className={`hamburger ${isActive ? "active" : ""}`}>
+              <span className={`bar ${isActive ? "active" : ""}`}></span>
+              <span className={`bar ${isActive ? "active" : ""}`}></span>
+              <span className={`bar ${isActive ? "active" : ""}`}></span>
+            </div>
+          </div>
+        </nav>
+      </Flex>
+
+      {/* Moved nav-menu outside of wrapper-navbar */}
+      <div className={`nav-menu ${isActive ? "active" : ""}`}>
+        <ul>
+          {menuItems.map((item) => (
+            <li
+              key={item.path}
+              className={pathname === item.path ? "active" : ""}
+            >
+              <Link href={item.path} onClick={closeMenu}>
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

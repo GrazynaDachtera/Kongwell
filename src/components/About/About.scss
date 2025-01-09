@@ -1,14 +1,47 @@
 .containerSection {
-  height: auto;
+  position: relative;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
   margin: 0 auto;
-  padding: 4rem;
+  padding: 2rem;
   box-sizing: border-box;
   background: #132A35;
+
+  background-image: url('/AboutComponent/AboutImage.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(19, 42, 53, 0.5);
+    z-index: 0;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    border-bottom: 2px solid #d4d4d4; 
+    color: #d4d4d4;
+    font-weight: 300;
+    letter-spacing: 0.02rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 
   .firstRow,
   .secondRow {
@@ -34,9 +67,9 @@
   }
 
   .container {
-    flex: 0 0 calc(50% - 2rem); /* Adjusted for gap */
+    flex: 0 0 calc(50% - 2rem);
     box-sizing: border-box;
-    background: #ededed;
+    background: rgba(238, 238, 238, 0.9);
     padding: 1rem;
     margin: 0.5rem;
     border-radius: 1rem;
@@ -44,15 +77,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    opacity: 0; /* Start hidden */
-    transform: translateY(20px); /* Slight downward offset */
-    transition: opacity 0.6s ease, transform 0.6s ease; /* Transition effects */
-    box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
-
-    /* Box Shadow */
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
 
-    /* "Read More" Button Styles */
     .readMoreButton {
       background-color: #ededed;
       color: #000000;
@@ -68,18 +97,15 @@
       transition: background-color 0.3s ease;
     }
 
-    /* If using <a> tags, ensure they look like buttons */
     a.readMoreButton {
       display: inline-block;
     }
 
-    /* Show class triggers the fade-in */
     &.show {
       opacity: 1;
       transform: translateY(0);
     }
 
-    /* Assign different transition delays based on container number */
     &.container1.show {
       transition-delay: 0.3s;
     }
@@ -97,14 +123,12 @@
     }
   }
 
-  /* Optional: Additional container-specific styles */
   .container1 {}
   .container2 {}
   .container3 {}
   .container4 {}
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .containerSection {
     padding: 2rem;
@@ -112,23 +136,28 @@
     .firstRow,
     .secondRow {
       flex-direction: column;
-      align-items: center;
-      /* On mobile, gap remains vertical spacing between stacked containers */
+      text-align: left;
     }
 
     .container {
       flex: 1 1 100%;
       max-width: 100%;
-      transition-delay: 0s !important; /* Remove delays on mobile for better UX */
-      opacity: 0; /* Reset to hidden */
-      transform: translateY(20px); /* Reset position */
+      transition-delay: 0s !important;
+      opacity: 0;
+      transform: translateY(20px);
       box-shadow: rgb(204, 219, 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset;
+      background: rgba(238, 238, 238, 0.95);
     }
 
     .container.show {
       opacity: 1;
       transform: translateY(0);
-      transition-delay: 0s; /* No delay on mobile */
+      transition-delay: 0s;
+    }
+
+    h3 {
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
     }
   }
 }

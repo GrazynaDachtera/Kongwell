@@ -4,7 +4,6 @@ import React from "react";
 import { Button, Form, Input } from "antd";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import Image from "next/image";
 import "./Contact.scss";
 
 const validateMessages = {
@@ -20,7 +19,6 @@ const validateMessages = {
 
 const onFinish = (values: any) => {
   console.log("Form Values:", values);
-  // Handle form submission (e.g., send data to an API)
 };
 
 export default function Contact() {
@@ -28,15 +26,6 @@ export default function Contact() {
     <section className="ContactPage">
       <Navbar />
       <section className="FormSection">
-        <div className="ImageSection">
-          <Image
-            src="/ContactComponent/contactUs.jpeg"
-            alt="Contact Us"
-            width={500} // Desired width
-            height={500} // Desired height
-            className="contact-image"
-          />
-        </div>
         <div className="ContactTitle">
           <h2>Contact Us</h2>
           <p>
@@ -44,7 +33,7 @@ export default function Contact() {
           </p>
           <div className="ContactForm">
             <Form
-              layout="vertical" // Changed to vertical layout
+              layout="vertical"
               name="contact-form"
               onFinish={onFinish}
               validateMessages={validateMessages}

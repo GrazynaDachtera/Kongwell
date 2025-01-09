@@ -1,6 +1,6 @@
 import { Flex, Stack, Divider } from "@chakra-ui/react";
 import Link from "next/link";
-import Image from "next/image"; // Importing Image from next/image
+import Image from "next/image";
 import "./Footer.scss";
 
 // Footer menu interface
@@ -77,9 +77,7 @@ const Footer = () => {
           <Divider className="footer-divider" />
 
           <Flex justify="space-between" className="footer-footer">
-            <Flex align="center" className="footer-footer-logo">
-              {/* You can repeat the logo here if needed */}
-            </Flex>
+            <Flex align="center" className="footer-footer-logo"></Flex>
           </Flex>
         </div>
       </div>
