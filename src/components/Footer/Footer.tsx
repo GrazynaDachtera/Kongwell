@@ -1,7 +1,7 @@
-import { Flex, Stack, Divider } from "@chakra-ui/react";
 import Link from "next/link";
 import Image from "next/image";
 import "./Footer.scss";
+import { Flex } from "@chakra-ui/react";
 
 // Footer menu interface
 interface IFooterMenu {
@@ -11,14 +11,14 @@ interface IFooterMenu {
 
 // Footer Menu Component
 const FooterMenu = ({ header, links }: IFooterMenu) => (
-  <Stack spacing={4} className="footer-menu-container">
+  <div className="footer-menu-container">
     <h4 className="footer-menu-header">{header}</h4>
     {links.map(({ text, to }, index) => (
       <Link href={to} key={index} className="footer-menu-link">
         {text}
       </Link>
     ))}
-  </Stack>
+  </div>
 );
 
 // Footer Component
@@ -63,7 +63,6 @@ const Footer = () => {
 
           <section className="formSection">
             <div className="contactForm"></div>
-
             <div className="contactImage"></div>
           </section>
 
@@ -73,8 +72,6 @@ const Footer = () => {
               <FooterMenu key={index} {...menu} />
             ))}
           </Flex>
-
-          <Divider className="footer-divider" />
 
           <Flex justify="space-between" className="footer-footer">
             <Flex align="center" className="footer-footer-logo"></Flex>
