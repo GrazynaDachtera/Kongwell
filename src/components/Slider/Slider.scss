@@ -1,44 +1,63 @@
-@import 'antd/dist/reset.css'; 
-@import 'typeface-raleway';
-@import 'typeface-poppins';
+@import "typeface-raleway";
+@import "typeface-poppins";
 
-.container {
-  background: #132A35;
-  padding: 4rem 10rem 6rem 10rem;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
-  color: #d4d4d4;
-  font-weight: 300;
-  letter-spacing: 0.02rem;
+$clr-text: #d4d4d4;
+$font-main: "Poppins", sans-serif;
+$bg-dark: #16181A;
+
+// ✅ Apply background to both slick containers
+.ant-carousel .slick-slide,
+.ant-carousel .slick-slide > div {
+  background-color: $bg-dark !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.slide {
+  background-color: transparent !important;
+  color: $clr-text;
+  font-family: $font-main;
   text-align: center;
+  letter-spacing: 0.02rem;
+  padding: clamp(1rem, 2vw, 2rem) clamp(3rem, 8vw, 10rem); 
+  position: relative;
+  z-index: 2;
+
+  h2,
+  p {
+    margin: 0 auto;
+    max-width: 60ch;
+    white-space: pre-line;
+  }
 
   h2 {
-    border-bottom: 2px solid #d4d4d4; 
-    width: 15rem;
-    text-align: center;
-    margin: 0 auto; 
-    font-family: 'Poppins', sans-serif;
+    font-size: clamp(1.5rem, 5vw, 2rem);
     font-weight: 300;
-    letter-spacing: 0.02rem;
-    font-size: 2rem;
+    border-bottom: 2px solid $clr-text;
+    width: fit-content;
   }
 
   p {
-    padding-top: 2rem; 
-    line-height: 1.6; 
+    font-size: clamp(0.9rem, 2.8vw, 1rem);
+    line-height: 1.6;
+    padding-top: 2rem;
   }
 }
 
+.ant-carousel {
+  .slick-prev,
+  .slick-next {
+    z-index: 1;
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+  }
 
-.ant-carousel .slick-prev, 
-.ant-carousel .slick-next {
-  z-index: 1;
-}
+  .slick-prev {
+    left: clamp(0.5rem, 4vw, 2rem) !important;
+  }
 
-.ant-carousel .slick-prev {
-  left: 30px !important;
-}
-
-.ant-carousel .slick-next {
-  right: 30px !important;
+  .slick-next {
+    right: clamp(0.5rem, 4vw, 2rem) !important;
+  }
 }

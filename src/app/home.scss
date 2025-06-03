@@ -3,18 +3,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap');
 @import 'typeface-raleway';
 @import 'typeface-poppins';
-@import 'antd/dist/reset.css'; 
+@import 'antd/dist/reset.css';
 
 @font-face {
   font-family: 'Montserrat';
-  src: url('/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype'); 
+  src: url('/fonts/Montserrat/Montserrat-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/Inter/Inter-Regular.ttf') format('truetype'); 
+  src: url('/fonts/Inter/Inter-Regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -48,12 +48,6 @@ html {
   min-height: 100vh;
 }
 
-:root {
-  --nav-link: #c98e59;
-  --nav-link-active: #74471f;
-  --footer-primary: #2a2e30;
-  --button-primary: #bf8654;
-}
 
 .remove-scrolling {
   height: 100%;
@@ -73,17 +67,18 @@ html {
   padding: 50px 0;
 }
 
-
 .BackgroundImage {
   position: relative;
   width: 100%;
-  min-height: 100vh; 
-  background: url('/Header/SliderImage.jpeg') no-repeat center top;
-  background-size: cover;
+  min-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   z-index: 999;
-
+  background-image: url("/Header/Background-img.jpg"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 
   &::before {
     content: "";
@@ -92,9 +87,9 @@ html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5); // Keep the overlay for readability
     z-index: 1;
-    transition: background-color 0.3s ease; 
+    transition: background-color 0.3s ease;
   }
 
   .wrapper-navbar,

@@ -15,11 +15,11 @@
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: rgba(19, 42, 53, 0.8);
+    background-color: rgba(0, 0, 0, 0.105);
   }
 
   &.active {
-    background-color: rgba(19, 42, 53, 0.8);
+    background-color: rgba(0, 0, 0, 0.105);
   }
 
   .wrapper-assist-navbar {
@@ -35,7 +35,7 @@
   justify-content: space-between;
   align-items: center;
   z-index: 1001;
-  padding: 0 2rem;
+  padding: 0 0.5rem;
   background-color: transparent;
 }
 

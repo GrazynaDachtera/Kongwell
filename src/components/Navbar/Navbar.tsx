@@ -45,9 +45,7 @@ const NavBar: React.FC = () => {
     { label: "home", path: "/" },
     { label: "about us", path: "/AboutUs" },
     { label: "service", path: "/Service" },
-    { label: "blog", path: "/Blog" },
     { label: "contact", path: "/Contact" },
-    { label: "social media", path: "/Social" },
   ];
 
   return (
@@ -57,8 +55,8 @@ const NavBar: React.FC = () => {
           <div className="logo-navbar">
             <Image
               src={"/Navbar/gorilla.svg"}
-              width={98}
-              height={100}
+              width={58}
+              height={60}
               className="Kongwellogo"
               alt={"Kongwellogo"}
             />

@@ -1,16 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./Header.scss";
 
-const Header: React.FC = () => {
+const Header = () => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimate(true);
-    }, 10); // Adjusted delay
-
+    const timer = setTimeout(() => setAnimate(true), 10);
     return () => clearTimeout(timer);
   }, []);
 
@@ -18,8 +15,8 @@ const Header: React.FC = () => {
     <section className="KongwellHeader">
       <div className="content">
         <h1 className="title">Kongwell Energy Trading</h1>
-        <p className={`description ${animate ? "animate" : ""}`}>
-          Maximize Your Energy Potential | Go Big with King Kong
+        <p className={`description${animate ? " animate" : ""}`}>
+          Maximize Your Energy Potential&nbsp;|&nbsp;Go Big with King Kong
         </p>
       </div>
     </section>

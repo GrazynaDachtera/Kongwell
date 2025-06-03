@@ -26,18 +26,15 @@ const Footer = () => {
   const menus = [
     {
       header: "Services",
-      links: [{ text: "Sales & acquisition", to: "/Blog" }],
+      links: [{ text: "Service", to: "/Service" }],
     },
     {
       header: "Information",
-      links: [{ text: "Blog", to: "/Blog" }],
+      links: [{ text: "Contact us", to: "/Contact" }],
     },
     {
       header: "Company",
-      links: [
-        { text: "About us", to: "/About" },
-        { text: "Contact us", to: "/Contact" },
-      ],
+      links: [{ text: "About us", to: "/About" }],
     },
   ];
 
@@ -55,8 +52,8 @@ const Footer = () => {
             <Image
               src="/Footer/gorilla-footer.svg"
               alt="Gorilla Logo"
-              width={20}
-              height={20}
+              width={30}
+              height={30}
               className="gorilla-logo"
             />
           </Flex>
