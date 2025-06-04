@@ -1,0 +1,42 @@
+@import "typeface-raleway";
+@import "typeface-poppins";
+
+$clr-text: #d4d4d4;
+$font-main: "Poppins", sans-serif;
+$bg-dark: #16181A;
+
+.ContactHome {
+  background-color: $bg-dark;
+  text-align: center;
+  padding: 4rem;
+  font-weight: 300;
+  color: $clr-text;
+  font-size: 1rem;
+  font-family: $font-main;
+  white-space: pre-line;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+
+    .email-icon {
+      font-size: 1.2rem;
+      color: #ffffff;
+    }
+
+    a {
+      color: $clr-text;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

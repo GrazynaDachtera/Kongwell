@@ -44,7 +44,6 @@ const NavBar: React.FC = () => {
   const menuItems = [
     { label: "home", path: "/" },
     { label: "about us", path: "/AboutUs" },
-    { label: "service", path: "/Service" },
     { label: "contact", path: "/Contact" },
   ];
 
@@ -87,7 +86,6 @@ const NavBar: React.FC = () => {
         </nav>
       </Flex>
 
-      {/* Moved nav-menu outside of wrapper-navbar */}
       <div className={`nav-menu ${isActive ? "active" : ""}`}>
         <ul>
           {menuItems.map((item) => (

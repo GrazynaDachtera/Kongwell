@@ -1,29 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Flex, Box, Heading, List, ListItem } from "@chakra-ui/react";
 import "./Footer.scss";
-import { Flex } from "@chakra-ui/react";
 
-// Footer menu interface
 interface IFooterMenu {
   header: string;
   links: { text: string; to: string }[];
 }
 
-// Footer Menu Component
 const FooterMenu = ({ header, links }: IFooterMenu) => (
-  <div className="footer-menu-container">
-    <h4 className="footer-menu-header">{header}</h4>
-    {links.map(({ text, to }, index) => (
-      <Link href={to} key={index} className="footer-menu-link">
-        {text}
-      </Link>
-    ))}
-  </div>
+  <Box className="footer-menu-container">
+    <Heading as="h4" size="md" className="footer-menu-header">
+      {header}
+    </Heading>
+    <List spacing={2} className="footer-menu-list">
+      {links.map(({ text, to }) => (
+        <ListItem key={to}>
+          <Link href={to} className="footer-menu-link">
+            {text}
+          </Link>
+        </ListItem>
+      ))}
+    </List>
+  </Box>
 );
 
-// Footer Component
 const Footer = () => {
-  const menus = [
+  const menus: IFooterMenu[] = [
     {
       header: "Services",
       links: [{ text: "Service", to: "/Service" }],
@@ -39,42 +42,50 @@ const Footer = () => {
   ];
 
   return (
-    <Flex direction="column" align="center" className="footer-main-container">
-      <div className="wrapper-footer">
-        <div className="wrapper-assist-footer">
-          {/* Gorilla Logo at the top */}
-          <Flex
-            direction="column"
-            align="center"
-            justify="center"
-            className="footer-logo-container"
-          >
-            <Image
-              src="/Footer/gorilla-footer.svg"
-              alt="Gorilla Logo"
-              width={30}
-              height={30}
-              className="gorilla-logo"
-            />
-          </Flex>
+    <Flex
+      as="footer"
+      direction="column"
+      align="center"
+      className="footer-main-container"
+    >
+      <Flex
+        direction="column"
+        align="center"
+        justify="center"
+        className="footer-logo-container"
+      >
+        <Image
+          src="/Footer/gorilla-footer.svg"
+          alt="Gorilla Logo"
+          width={30}
+          height={30}
+          className="gorilla-logo"
+        />
+      </Flex>
 
-          <section className="formSection">
-            <div className="contactForm"></div>
-            <div className="contactImage"></div>
-          </section>
+      <Flex
+        className="footer-middle"
+        justify="space-between"
+        wrap="wrap"
+        maxW="75rem"
+        w="100%"
+      >
+        {menus.map((menu) => (
+          <FooterMenu key={menu.header} {...menu} />
+        ))}
+      </Flex>
 
-          {/* Footer menus */}
-          <Flex className="footer-middle" justify="space-between" wrap="wrap">
-            {menus.map((menu, index) => (
-              <FooterMenu key={index} {...menu} />
-            ))}
-          </Flex>
-
-          <Flex justify="space-between" className="footer-footer">
-            <Flex align="center" className="footer-footer-logo"></Flex>
-          </Flex>
-        </div>
-      </div>
+      <Flex
+        className="footer-footer"
+        justify="center"
+        align="center"
+        maxW="75rem"
+        w="100%"
+      >
+        <Box className="footer-footer-terms">
+          © {new Date().getFullYear()} Kongwell Company | All rights reserved.
+        </Box>
+      </Flex>
     </Flex>
   );
 };
