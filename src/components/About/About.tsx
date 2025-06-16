@@ -22,20 +22,29 @@ const About = () => {
   const refs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
+    const elements = refs.current; // take a snapshot of current refs
+
     const observer = new IntersectionObserver(
-      (entries) =>
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("show");
-            observer.unobserve(e.target);
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
           }
-        }),
+        });
+      },
       { threshold: 0.1 }
     );
 
-    refs.current.forEach((el) => el && observer.observe(el));
+    elements.forEach((el) => {
+      if (el) observer.observe(el);
+    });
 
-    return () => refs.current.forEach((el) => el && observer.unobserve(el));
+    return () => {
+      elements.forEach((el) => {
+        if (el) observer.unobserve(el);
+      });
+    };
   }, []);
 
   return (
@@ -48,7 +57,9 @@ const About = () => {
             key={title}
             className="card"
             style={{ "--delay": `${i * 0.3}s` } as React.CSSProperties}
-            ref={(el) => (refs.current[i] = el!)}
+            ref={(el) => {
+              if (el) refs.current[i] = el;
+            }}
           >
             <h2>{title}</h2>
             <p>{content}</p>
