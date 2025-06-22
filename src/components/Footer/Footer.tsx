@@ -75,15 +75,18 @@ const Footer = () => {
         ))}
       </Flex>
 
-      <Flex
-        className="footer-footer"
-        justify="center"
-        align="center"
-        maxW="75rem"
-        w="100%"
-      >
-        <Box className="footer-footer-terms">
-          © {new Date().getFullYear()} Kongwell Company | All rights reserved.
+      <Flex className="footer-footer" justify="center" align="center">
+        <Box className="footer-footer-edges">
+          <Box className="footer-footer-disclaimer">
+            Kongwell Energy Trading trades solely with proprietary capital and
+            does not solicit or accept external investors. The information on
+            this website is provided for regulatory and informational purposes
+            only and does not constitute investment advice or an offer to deal
+            in any financial instrument.
+          </Box>
+          <Box className="footer-footer-terms">
+            © {new Date().getFullYear()} Kongwell Company | All rights reserved.
+          </Box>
         </Box>
       </Flex>
     </Flex>

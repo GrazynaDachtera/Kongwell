@@ -1,8 +1,8 @@
 @import "typeface-poppins";
 
-$clr-dark: #2C3134;
-$clr-overlay: #101716c1;
-$clr-card-bg: rgba(238, 238, 238, 0.681);
+$clr-dark: #d4d4d4;
+$clr-card-bg: #16181a;
+$clr-subcard-bg: #6e707163;
 $clr-text-light: #d4d4d4;
 $font-main: "Poppins", sans-serif;
 
@@ -15,7 +15,7 @@ $font-main: "Poppins", sans-serif;
   align-items: center;
   justify-content: center;
   padding: clamp(1.5rem, 4vw, 3rem);
-    background-image: url("/AboutComponent/3image.jpg");
+  background-image: url("/AboutComponent/3image.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -24,7 +24,7 @@ $font-main: "Poppins", sans-serif;
     content: "";
     position: absolute;
     inset: 0;
-    background: #16181A;
+    background: #16181a;
     z-index: 0;
   }
 
@@ -57,12 +57,9 @@ $font-main: "Poppins", sans-serif;
     max-width: clamp(250px, 45%, 500px);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background: $clr-card-bg;
-    color: $clr-dark;
     padding: 1rem;
     border-radius: 1rem;
-    box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
     opacity: 0;
     transform: translateY(20px);
     transition:
@@ -72,24 +69,13 @@ $font-main: "Poppins", sans-serif;
     h2 {
       font-size: clamp(1rem, 3vw, 1.25rem);
       margin-bottom: 0.5rem;
+      color: $clr-text-light;
     }
 
     p {
       font-size: clamp(0.875rem, 2.5vw, 1rem);
       line-height: 1.6;
-      margin-bottom: 1rem;
-    }
-
-    .readMoreButton {
-      align-self: flex-start;
-      background: #ededed;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 0.9rem;
-      cursor: pointer;
-      text-decoration: none;
-      padding: 0.4rem 0.75rem;
-      transition: background 0.3s;
+      color: $clr-text-light;
     }
 
     &.show {
@@ -97,6 +83,33 @@ $font-main: "Poppins", sans-serif;
       transform: translateY(0);
     }
   }
+
+  .subCards {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(0.6rem, 2vw, 0.8rem);
+    margin-top: 1rem;
+  }
+
+  .subCard {
+    background: $clr-subcard-bg;
+    color: #16181a;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
+    line-height: 1.6;
+  }
+
+  .card.show .subCard {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .card.show .subCard:nth-child(1) { transition-delay: 0.6s; }
+  .card.show .subCard:nth-child(2) { transition-delay: 1.2s; }
+  .card.show .subCard:nth-child(3) { transition-delay: 1.8s; }
 }
 
 @media (max-width: 768px) {
@@ -105,7 +118,6 @@ $font-main: "Poppins", sans-serif;
       flex-direction: column;
       gap: 1rem;
     }
-
     .card {
       flex: 1 1 100%;
       max-width: 100%;

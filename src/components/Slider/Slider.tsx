@@ -3,12 +3,12 @@ import "./Slider.scss";
 
 const slides = [
   {
-    title: "Our Services",
-    text: `At Kongwell, we provide comprehensive energy trading solutions that bridge the gap between producers and consumers across global markets. Our services focus on optimizing supply chains and reducing risk to ensure the seamless flow of energy. We aim to deliver innovative, reliable, and efficient solutions that meet the growing demands of the energy industry.`,
+    title: "Who we are",
+    text: `Kongwell Energy Trading is a privately-held quantitative trading firm founded by senior professionals with a track record that spans multiple asset classes. Our collective background in quantitative research, exchange technology, and risk management lets us approach energy markets with the same rigour typically reserved for global macro desks - only applied to the nuanced dynamics of power markets.`,
   },
   {
-    title: "Our Mission",
-    text: `We envision a future where global energy systems are sustainable, efficient, and driven by innovation. Kongwell aims to be a leader in the energy trading industry, consistently pushing the boundaries of efficiency and reliability. Our vision is to build a dynamic energy network that supports both market needs and environmental responsibility.`,
+    title: "What we do",
+    text: `We deploy proprietary algorithms and statistical models to identify and correct market inefficiencies. By supplying disciplined, price-sensitive order flow, we help validate quoted prices and accelerate price discovery during periods of heightened volatility.`,
   },
 ];
 

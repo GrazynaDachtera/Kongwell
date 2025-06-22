@@ -4,11 +4,12 @@ import "./ContactHome.scss";
 
 const ContactHome = () => (
   <section className="ContactHome">
-    <h2>Contact Us</h2>
-    <p>
-      <span className="email-icon">💬</span>
-      <a href="mailto:inquiries@kongwell.com">inquiries@kongwell.com</a>
-    </p>
+    <h3>Our Mission is simple</h3>
+    <h4>
+      Deliver measurable efficiency gains to Europe’s energy markets - quietly,
+      responsibly, and with unwavering respect for the rules that keep those
+      markets fair.
+    </h4>
   </section>
 );
 
