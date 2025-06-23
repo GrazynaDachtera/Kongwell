@@ -18,9 +18,6 @@ const Header: React.FC = () => {
           Kongwell Energy Trading
         </h1>
         <p className={`description${animate ? " animate" : ""}`}>
-          Maximize Your Energy Potential
-        </p>
-        <p className={`description${animate ? " animate" : ""}`}>
           Driving liquidity and
           <br />
           efficiency in European energy markets

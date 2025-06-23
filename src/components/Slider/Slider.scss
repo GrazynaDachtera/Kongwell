@@ -3,27 +3,26 @@
 
 $clr-text: #d4d4d4;
 $font-main: "Poppins", sans-serif;
-$bg-dark: #16181A;
+$bg-dark: #030D10;
 
+.ant-carousel .slick-list {
+  background-color: $bg-dark !important;
+  min-height: 60vh;
+}
 
 .ant-carousel .slick-slide,
 .ant-carousel .slick-slide > div {
-  background-color: $bg-dark !important;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 60vh; 
 }
 
 .slide {
-  background-color: transparent !important;
   color: $clr-text;
   font-family: $font-main;
   text-align: center;
   letter-spacing: 0.02rem;
   padding: clamp(1rem, 2vw, 2rem) clamp(3rem, 8vw, 10rem);
-  position: relative;
-  z-index: 2;
 
   h2,
   p {
@@ -53,23 +52,17 @@ $bg-dark: #16181A;
     font-size: clamp(1.2rem, 3vw, 1.6rem);
   }
 
-  .slick-prev {
-    left: clamp(0.5rem, 4vw, 2rem) !important;
-  }
-
-  .slick-next {
-    right: clamp(0.5rem, 4vw, 2rem) !important;
-  }
+  .slick-prev  { left:  clamp(0.5rem, 4vw, 2rem) !important; }
+  .slick-next  { right: clamp(0.5rem, 4vw, 2rem) !important; }
 }
 
-
-@media (max-width: 480px) {
-  .ant-carousel .slick-slide,
-  .ant-carousel .slick-slide > div {
-    min-height: auto;  
+@media (max-width: 768px) {
+  .ant-carousel .slick-list {
+    min-height: auto;
   }
 
   .slide {
-    padding: clamp(0.8rem, 3vw, 1.5rem) clamp(2rem, 5vw, 4rem);
+    padding: clamp(0.8rem, 3vw, 1.5rem)
+             clamp(2rem, 5vw, 4rem);
   }
 }

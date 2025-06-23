@@ -59,7 +59,7 @@ const About = () => {
 
   return (
     <section className="containerSection">
-      <h3>Our Milestones</h3>
+      <h3>Powering Transparent Markets</h3>
 
       <div className="row">
         {milestones.map((m, i) => (

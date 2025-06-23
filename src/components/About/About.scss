@@ -1,8 +1,8 @@
 @import "typeface-poppins";
 
 $clr-dark: #d4d4d4;
-$clr-card-bg: #16181a;
-$clr-subcard-bg: #6e707163;
+$clr-card-bg: #030D10;
+$clr-subcard-bg: #344954c1;
 $clr-text-light: #d4d4d4;
 $font-main: "Poppins", sans-serif;
 
@@ -24,7 +24,7 @@ $font-main: "Poppins", sans-serif;
     content: "";
     position: absolute;
     inset: 0;
-    background: #16181a;
+    background: #030D10;
     z-index: 0;
   }
 
