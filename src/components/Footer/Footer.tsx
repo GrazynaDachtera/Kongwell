@@ -1,96 +1,76 @@
-import Link from "next/link";
+"use client";
+
 import Image from "next/image";
-import { Flex, Box, Heading, List, ListItem } from "@chakra-ui/react";
 import "./Footer.scss";
 
-interface IFooterMenu {
-  header: string;
-  links: { text: string; to: string }[];
-}
-
-const FooterMenu = ({ header, links }: IFooterMenu) => (
-  <Box className="footer-menu-container">
-    <Heading as="h4" size="md" className="footer-menu-header">
-      {header}
-    </Heading>
-    <List spacing={2} className="footer-menu-list">
-      {links.map(({ text, to }) => (
-        <ListItem key={to}>
-          <Link href={to} className="footer-menu-link">
-            {text}
-          </Link>
-        </ListItem>
-      ))}
-    </List>
-  </Box>
+const FooterFirstSection = () => (
+  <div className="footer-first-section">
+    <Image
+      src="/Footer/KongwellFooter.png"
+      alt="Kongwell logo"
+      width={180}
+      height={50}
+      className="footer-logo"
+      priority
+    />
+  </div>
 );
 
-const Footer = () => {
-  const menus: IFooterMenu[] = [
+const FooterSecondSection = () => {
+  const address = [
     {
-      header: "Services",
-      links: [{ text: "Service", to: "/Service" }],
-    },
-    {
-      header: "Information",
-      links: [{ text: "Contact us", to: "/Contact" }],
-    },
-    {
-      header: "Company",
-      links: [{ text: "About us", to: "/About" }],
+      header: "Kongwell Sp. z o.o.",
+      address: "ul. Hoża 86/410, 00-682 Warszawa, Polska",
+      email: "inquiries@kongwell.com",
+      NIP: "NIP: 7011218901",
+      ACER: "ACER: A0024159A.PL",
+      KRS: "KRS: 0001122236",
     },
   ];
 
   return (
-    <Flex
-      as="footer"
-      direction="column"
-      align="center"
-      className="footer-main-container"
-    >
-      <Flex
-        direction="column"
-        align="center"
-        justify="center"
-        className="footer-logo-container"
-      >
-        <Image
-          src="/Footer/gorilla-footer.svg"
-          alt="Gorilla Logo"
-          width={30}
-          height={30}
-          className="gorilla-logo"
-        />
-      </Flex>
-
-      <Flex
-        className="footer-middle"
-        justify="space-between"
-        wrap="wrap"
-        maxW="75rem"
-        w="100%"
-      >
-        {menus.map((menu) => (
-          <FooterMenu key={menu.header} {...menu} />
-        ))}
-      </Flex>
-
-      <Flex className="footer-footer" justify="center" align="center">
-        <Box className="footer-footer-edges">
-          <Box className="footer-footer-disclaimer">
-            Kongwell Energy Trading trades solely with proprietary capital and
-            does not solicit or accept external investors. The information on
-            this website is provided for regulatory and informational purposes
-            only and does not constitute investment advice or an offer to deal
-            in any financial instrument.
-          </Box>
-          <Box className="footer-footer-terms">
-            © {new Date().getFullYear()} Kongwell Company | All rights reserved.
-          </Box>
-        </Box>
-      </Flex>
-    </Flex>
+    <div className="footer-second-section">
+      <div className="footer-address-wrapper">
+        <div className="footer-address-content">
+          {address.map((item, idx) => (
+            <div key={idx}>
+              <h4 className="footer-address-header">{item.header}</h4>
+              <p className="footer-address-street">{item.address}</p>
+              <p className="footer-address-email">{item.email}</p>
+              <p className="footer-nip">{item.NIP}</p>
+              <p className="footer-acer">{item.ACER}</p>
+              <p className="footer-krs">{item.KRS}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
+
+const FooterThirdSection = () => (
+  <div className="footer-third-section">
+    <p className="footer-disclaimer">
+      Kongwell Energy Trading trades solely with proprietary capital and does
+      not solicit or accept external investors. The information on this website
+      is provided for regulatory and informational purposes only and does not
+      constitute investment advice or an offer to deal in any financial
+      instrument.
+    </p>
+    <div className="footer-third-right">
+      © {new Date().getFullYear()} Kongwell Company&nbsp;| All rights reserved.
+    </div>
+  </div>
+);
+
+const Footer = () => (
+  <div className="footer-main-container">
+    <FooterFirstSection />
+    <hr className="footer-divider" />
+    <FooterSecondSection />
+    <hr className="footer-divider" />
+    <FooterThirdSection />
+  </div>
+);
 
 export default Footer;

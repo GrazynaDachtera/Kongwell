@@ -43,7 +43,6 @@ const NavBar: React.FC = () => {
 
   const menuItems = [
     { label: "home", path: "/" },
-    { label: "about us", path: "/AboutUs" },
     { label: "contact", path: "/Contact" },
   ];
 
