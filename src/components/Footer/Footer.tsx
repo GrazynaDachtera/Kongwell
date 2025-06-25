@@ -38,8 +38,8 @@ const FooterSecondSection = () => {
               <p className="footer-address-street">{item.address}</p>
               <p className="footer-address-email">{item.email}</p>
               <p className="footer-nip">{item.NIP}</p>
-              <p className="footer-acer">{item.ACER}</p>
               <p className="footer-krs">{item.KRS}</p>
+              <p className="footer-acer">{item.ACER}</p>
             </div>
           ))}
         </div>
@@ -58,7 +58,14 @@ const FooterThirdSection = () => (
       instrument.
     </p>
     <div className="footer-third-right">
-      © {new Date().getFullYear()} Kongwell Company&nbsp;| All rights reserved.
+      Contact:
+      <a
+        href="https://mail.google.com/mail/?view=cm&fs=1&to=inquiries@kongwell.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        inquiries@kongwell.com
+      </a>
     </div>
   </div>
 );
