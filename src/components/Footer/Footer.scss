@@ -17,6 +17,14 @@
   }
 }
 
+.footer-main-container a[x-apple-data-detectors],
+.footer-main-container a[href^="mailto"],
+.footer-main-container a[href^="tel"],
+.footer-main-container a[href^="maps"] {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
 .footer-second-section,
 .footer-third-section {
   .footer-address-header,

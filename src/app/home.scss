@@ -40,18 +40,31 @@ h5,
 h6,
 a {
   font-family: 'DM Sans', sans-serif;
-
 }
 
 body,
 html {
   width: 100%;
+  height: 100%;    
   min-height: 100vh;
-    margin: 0;
+  margin: 0;
   padding: 0;
   overflow-x: hidden;
 }
 
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+.footer-main-container {
+  flex-shrink: 0;
+}
 
 .remove-scrolling {
   height: 100%;
@@ -79,28 +92,28 @@ html {
   display: flex;
   flex-direction: column;
   z-index: 999;
-  background-image: url("/Header/vista-wei-0eDlr5DvZLY-unsplash.jpg"); 
+  background-image: url('/Header/vista-wei-0eDlr5DvZLY-unsplash.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+}
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); // Keep the overlay for readability
-    z-index: 1;
-    transition: background-color 0.3s ease;
-  }
+.BackgroundImage::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); 
+  z-index: 1;
+  transition: background-color 0.3s ease;
+}
 
-  .wrapper-navbar,
-  .KongwellHeader {
-    position: relative;
-    z-index: 2;
-  }
+.wrapper-navbar,
+.KongwellHeader {
+  position: relative;
+  z-index: 2;
 }
 
 @media (max-width: 1400px) {
