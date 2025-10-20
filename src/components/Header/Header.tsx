@@ -7,20 +7,16 @@ const Header: React.FC = () => {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setAnimate(true), 10);
-    return () => clearTimeout(timer);
+    const id = setTimeout(() => setAnimate(true), 10);
+    return () => clearTimeout(id);
   }, []);
 
   return (
-    <section className="KongwellHeader">
-      <div className="content">
-        <h1 className={`title${animate ? " animate" : ""}`}>
-          Kongwell Energy Trading
-        </h1>
-        <p className={`description${animate ? " animate" : ""}`}>
-          Driving liquidity and
-          <br />
-          efficiency in European energy markets
+    <section className="KongwellHeader" aria-label="Kongwell Energy Trading">
+      <div className={`content ${animate ? "animate" : ""}`}>
+        <h1 className="title fade-up">Kongwell Energy Trading</h1>
+        <p className="description fade-up">
+          Driving liquidity and efficiency in European energy markets.
         </p>
       </div>
     </section>

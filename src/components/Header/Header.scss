@@ -1,78 +1,111 @@
-@import "typeface-raleway";
+@import "@fontsource-variable/outfit";
+@import "@fontsource-variable/inter";
 
-$clr-text: #d4d4d4;
-$font-heading: "Raleway", sans-serif;
+$clr-text: #cfd6df;
+$clr-text-muted: #b8c2cf;
+$clr-shadow: rgba(0, 0, 0, 0.45);
+
+$font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, "Inter Variable", sans-serif;
+$font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 .KongwellHeader {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
   position: relative;
-  padding-top: 16vw;
+  width: 100%;
+  min-height: clamp(26.25rem, 52vw, 43.75rem);
+  display: grid;
+  place-items: center;
+  padding: clamp(4rem, 12vw, 8rem) 1rem;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.55) 60%,
+      rgba(0, 0, 0, 0.7) 100%
+    );
+    pointer-events: none;
+  }
 
   .content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: relative;
+    z-index: 1;
     text-align: center;
+    max-width: 80rem;
+    padding-inline: 1rem;
   }
 
   .title,
   .description {
-    font-family: $font-heading;
-    color: $clr-text;
-    letter-spacing: 0.2rem;
-    opacity: 0;
+    margin: 0;
+    text-shadow: 0 0.125rem 0.75rem $clr-shadow;
   }
 
   .title {
+    color: $clr-text;
+    font-family: $font-heading;
+    font-weight: 650;
+    letter-spacing: 0.01em;
+    line-height: 1.08;
+    font-size: clamp(1.8rem, 4.8vw, 4rem);
+    margin-bottom: 0.5rem;
+  }
+
+  .description {
+    color: $clr-text-muted;
+    font-family: $font-body;
     font-weight: 500;
-    font-size: clamp(2rem, 6vw, 4rem);
-    margin-bottom: 1rem;
-    transition: opacity 1s ease-in-out;
-
-    &.animate {
-      transition-delay: 0s;
-      opacity: 1;
-    }
+    letter-spacing: 0.01em;
+    line-height: 1.5;
+    opacity: 0.94;
+    font-size: clamp(1.05rem, 2.2vw, 1.45rem);
+    max-width: 58ch;
+    margin-inline: auto;
+    margin-top: 0.65rem;
+    text-shadow: 0 0.0625rem 0.5rem $clr-shadow;
   }
 
-.description {
-  font-size: clamp(0.9rem, 3vw, 1.2rem);
-  width: 100%;
-  transition: opacity 1s ease-in-out;
+  .fade-up {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.985);
+    filter: blur(0.125rem);
+    transition: opacity 700ms ease, transform 700ms ease, filter 700ms ease;
+  }
 
-    &:nth-of-type(1).animate {
-      transition-delay: 0.5s;
-      opacity: 1;
-    }
-    &:nth-of-type(2).animate {
-      transition-delay: 1.5s;
-      opacity: 1;
-    }
+  .animate .fade-up {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
   }
 }
 
-@media (max-width: 768px) {
-  .KongwellHeader .title {
-    font-size: clamp(1.8rem, 7vw, 3rem);
-  }
-
-  .KongwellHeader .description {
-    font-size: clamp(0.8rem, 4vw, 1rem);
-    max-width: 45ch;
+@media (prefers-reduced-motion: reduce) {
+  .KongwellHeader .fade-up,
+  .KongwellHeader .animate .fade-up {
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 48rem) {
   .KongwellHeader .title {
-    font-size: clamp(1.5rem, 8vw, 2.5rem);
+    font-size: clamp(1.75rem, 6vw, 3.2rem);
   }
-
   .KongwellHeader .description {
-    font-size: clamp(0.7rem, 5vw, 0.9rem);
-    max-width: 35ch;
+    font-size: clamp(1rem, 3.8vw, 1.15rem);
+  }
+}
+
+@media (max-width: 30rem) {
+  .KongwellHeader .title {
+    font-size: clamp(1.6rem, 7.5vw, 2.2rem);
+  }
+  .KongwellHeader .description {
+    font-size: clamp(0.98rem, 4.6vw, 1.08rem);
   }
 }

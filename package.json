@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next export", 
+    "export": "next export",
     "start": "next start",
     "lint": "next lint"
   },
@@ -13,6 +13,8 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@fontsource-variable/inter": "^5.2.8",
+    "@fontsource-variable/outfit": "^5.2.8",
     "antd": "^5.21.2",
     "framer-motion": "^11.5.4",
     "next": "14.2.11",
