@@ -1,35 +1,13 @@
-@import 'typeface-poppins';
-@import 'typeface-raleway';
-
-$nav-bg: rgba(0, 0, 0, 0.105);
-
-.wrapper-navbar {
-  padding: 1.25rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Logo only, fixed in the same spot as before */
+.brand-mark {
   position: fixed;
-  inset: 0 auto auto 0;
-  width: 100%;
+  top: 1.25rem;   /* same offset you used previously */
+  left: 1.25rem;
   z-index: 10000;
-  background-color: transparent;
-  transition: background-color 0.3s ease;
-
-  &:hover,
-  &.active {
-    background-color: $nav-bg;
-  }
-
-  .navbar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between; // keeps the logo where it was
-    align-items: center;
-    z-index: 1001;
-    padding: 0 0.5rem;
-  }
+  line-height: 0; /* removes extra inline gap */
+  background: transparent;
 }
 
-.logo-navbar .Kongwellogo {
-  display: block;
+.brand-mark img {
+  display: block; /* avoid inline baseline gap */
 }
