@@ -20,14 +20,14 @@ const milestones: Milestone[] = [
     intro:
       "Efficient, transparent pricing is essential to the smooth functioning of Europe’s energy ecosystem. Our strategies support the objectives of REMIT by:",
     bullets: [
-      "Enhancing liquidity – Our disciplined, price-sensitive order flow converts passive quotes into executed trades, prompting market makers to refresh prices and supporting tighter spreads and deeper order books.",
-      "Accelerating price discovery – By swiftly lifting and hitting out-of-line quotes we transmit information across venues, aligning prices with underlying fundamentals.",
-      "Reducing systemic risk – Robust pre-trade limits, kill-switches, and real-time surveillance keep our activity safe and orderly.",
+      "Enhancing liquidity - Our disciplined, price-sensitive order flow converts passive quotes into executed trades, prompting market makers to refresh prices and supporting tighter spreads and deeper order books.",
+      "Accelerating price discovery - By swiftly lifting and hitting out-of-line quotes we transmit information across venues, aligning prices with underlying fundamentals.",
+      "Reducing systemic risk - Robust pre-trade limits, kill-switches, and real-time surveillance keep our activity safe and orderly.",
     ],
   },
   {
     title: "How we operate",
-    content: `100 % proprietary capital — no external investors or clients.
+    content: `100 % proprietary capital - no external investors or clients.
 
 Sophisticated simulations and back-testing ensure stability and safety of our strategies, even in volatile markets.
 

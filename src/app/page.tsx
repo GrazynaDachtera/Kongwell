@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import Navbar from "../components/Navbar/Navbar";
 import Header from "../components/Header/Header";
 import Slider from "../components/Slider/Slider";
 import ContactHome from "../components/ContactHome/ContactHome";
@@ -14,7 +13,6 @@ export default function Home() {
     <>
       <section className="KongwellWebsite">
         <div className="BackgroundImage">
-          <Navbar />
           <Header />
         </div>
         <Slider />

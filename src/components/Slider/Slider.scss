@@ -37,6 +37,18 @@ $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
     z-index: 0;
   }
 
+  .sliderSectionTitle {
+    margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+    text-align: center;
+    color: $text-strong;
+    font-family: $font-heading;
+    font-weight: 750;
+    letter-spacing: -0.01em;
+    font-size: clamp(1.6rem, 3.2vw, 2.25rem);
+    position: relative;
+    z-index: 1;
+  }
+
   .sliderGrid {
     position: relative;
     z-index: 1;

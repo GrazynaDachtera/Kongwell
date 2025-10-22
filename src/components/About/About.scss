@@ -1,4 +1,3 @@
-/* About.scss */
 @import "@fontsource-variable/outfit";
 @import "typeface-poppins";
 
@@ -16,8 +15,13 @@ $bullet-bg: rgba(52, 73, 84, 0.78);
 $font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
+/* —— spacing token to match Slider —— */
+$title_cards_gap: clamp(1.25rem, 3vw, 2rem);
+
 .containerSection {
   position: relative;
+  isolation: isolate;
+  z-index: 0;
   min-height: 100vh;
   width: 100%;
   padding-block: clamp(2rem, 6vw, 6rem);
@@ -25,20 +29,29 @@ $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   display: grid;
   place-items: start center;
   background: url("/AboutComponent/3image.jpg") center / cover no-repeat;
+  background-color: $bg-overlay;
+  margin-top: -1px;
+  border-top: 0;
+  background-clip: padding-box;
+  box-shadow: none;
+  overflow: hidden;
 
   &::before {
     content: "";
     position: absolute;
-    inset: 0;
+    inset: -1px 0 0 0;
     background: radial-gradient(120% 120% at 50% 0%, #02070a 0%, $bg-overlay 55%);
     z-index: 0;
+    pointer-events: none;
+    will-change: opacity;
+    backface-visibility: hidden;
   }
 
   > * { position: relative; z-index: 1; }
 }
 
 .sectionTitle {
-  margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+  margin: 0; /* reset */
   text-align: center;
   color: $text-strong;
   font-family: $font-heading;
@@ -47,9 +60,11 @@ $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-size: clamp(1.6rem, 3.2vw, 2.25rem);
 }
 
+/* Apply the exact gap below the title via the grid */
 .cardsGrid {
   width: min(72rem, 100%);
   margin-inline: auto;
+  margin-top: $title_cards_gap; /* 👈 same as Slider */
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1rem, 3vw, 2rem);
@@ -130,23 +145,21 @@ $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
 }
 
-/* stagger bullet items after card reveal */
 .aboutCard.show .bulletItem { opacity: 1; transform: translateY(0); }
 .aboutCard.show .bulletItem:nth-child(1) { transition-delay: 0.4s; }
 .aboutCard.show .bulletItem:nth-child(2) { transition-delay: 0.8s; }
 .aboutCard.show .bulletItem:nth-child(3) { transition-delay: 1.2s; }
 
-/* --- Responsive tweaks --- */
-@media (min-width: 90rem) { /* very wide desktops */
+@media (min-width: 90rem) {
   .cardsGrid { width: min(80rem, 100%); }
 }
 
-@media (max-width: 64rem) { /* tablets / small laptops */
+@media (max-width: 64rem) {
   .cardsGrid { grid-template-columns: 1fr; width: min(46rem, 100%); }
   .containerSection { padding-block: clamp(1.75rem, 8vw, 3.5rem); }
 }
 
-@media (max-width: 48rem) { /* large phones / portrait tablets */
+@media (max-width: 48rem) {
   .aboutCard {
     border-radius: 0.875rem;
     padding: clamp(1rem, 5vw, 1.25rem);
@@ -158,7 +171,7 @@ $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   .bulletItem .bulletText { font-size: clamp(0.92rem, 3.8vw, 1rem); }
 }
 
-@media (max-width: 30rem) { /* small phones */
+@media (max-width: 30rem) {
   .containerSection { padding-inline: max(0.75rem, env(safe-area-inset-left)); }
   .cardsGrid { gap: 0.875rem; }
   .cardText { line-height: 1.55; }

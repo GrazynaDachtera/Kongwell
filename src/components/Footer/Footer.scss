@@ -15,10 +15,13 @@ $font-body:    "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-ser
 $edge-offset: 1.25rem;
 
 .footerContainer {
+  position: relative;
+  isolation: isolate;
+  z-index: 0;
   width: 100%;
   color: $text-body;
   background: $bg-footer;
-  margin-top: 0;
+  margin-top: -1px;
   padding-top: clamp(1.75rem, 4vw, 2.75rem);
   padding-bottom: clamp(1.5rem, 4.5vw, 3rem);
   padding-left:  max($edge-offset, env(safe-area-inset-left));

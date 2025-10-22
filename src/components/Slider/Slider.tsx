@@ -51,6 +51,8 @@ export default function Slider() {
 
   return (
     <section className="kongwellSlider" aria-label="About Kongwell">
+      <h3 className="sliderSectionTitle">About Kongwell</h3>
+
       <div className="sliderGrid">
         {slides.map(({ title, text }, i) => (
           <article

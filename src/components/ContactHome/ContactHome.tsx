@@ -1,4 +1,3 @@
-// ContactHome.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -33,18 +32,13 @@ export default function ContactHome() {
 
   return (
     <section ref={sectionRef} className="contactHome" aria-label="Our Mission">
-      <h3
-        className="missionTitle fadeUp"
-        style={{ "--delay": `${BASE_DELAY_S}s` } as CSSVars}
-      >
-        Our Mission is simple
-      </h3>
+      <h3 className="missionTitle">Our Mission is simple</h3>
 
       <h4
         className="missionText fadeUp"
         style={{ "--delay": `${BASE_DELAY_S + STAGGER_S}s` } as CSSVars}
       >
-        Deliver measurable efficiency gains to Europe’s energy markets -
+        Deliver measurable efficiency gains to Europe’s energy markets –
         quietly, responsibly, and with unwavering respect for the rules that
         keep those markets fair.
       </h4>
