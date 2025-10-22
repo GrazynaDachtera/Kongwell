@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+/* Global.scss */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Ysabeau:ital,wght@0,1..1000;1,1..1000&display=swap');
 @import 'typeface-raleway';
@@ -27,12 +28,10 @@
   box-sizing: border-box;
 }
 
-
-
 body,
 html {
   width: 100%;
-  height: 100%;    
+  height: 100%;
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -73,28 +72,31 @@ main {
 
 .BackgroundImage {
   position: relative;
+  isolation: isolate;
   width: 100%;
   min-height: 90vh;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  z-index: 999;
-  background-image: url('/Header/vista-wei-0eDlr5DvZLY-unsplash.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  display: grid;
+  place-items: center;
+  z-index: 0;
+  background: url('/Header/vista-wei-0eDlr5DvZLY-unsplash.jpg') center / cover no-repeat;
 }
 
-.BackgroundImage::before {
-  content: '';
+.BackgroundImage::after {
+  content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); 
+  inset: -4px;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.55) 30%,
+    rgba(0, 0, 0, 0.75) 60%,
+    rgba(0, 0, 0, 0.95) 100%
+  );
+  pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
   z-index: 1;
-  transition: background-color 0.3s ease;
 }
 
 .wrapper-navbar,

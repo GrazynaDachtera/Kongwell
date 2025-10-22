@@ -1,4 +1,6 @@
-import { Carousel } from "antd";
+"use client";
+
+import { useEffect, useState } from "react";
 import "./Slider.scss";
 
 const slides = [
@@ -12,15 +14,28 @@ const slides = [
   },
 ];
 
-const Slider = () => (
-  <Carousel arrows adaptiveHeight>
-    {slides.map(({ title, text }) => (
-      <div className="slide" key={title}>
-        <h2>{title}</h2>
-        <p>{text}</p>
+const Slider = () => {
+  const [animate, setAnimate] = useState(false);
+  useEffect(() => {
+    const id = setTimeout(() => setAnimate(true), 10);
+    return () => clearTimeout(id);
+  }, []);
+
+  return (
+    <section
+      className={`KongwellSlider ${animate ? "animate" : ""}`}
+      aria-label="About Kongwell"
+    >
+      <div className="cards">
+        {slides.map(({ title, text }) => (
+          <article className="card fade-up" key={title}>
+            <h3 className="card-title">{title}</h3>
+            <p className="card-text">{text}</p>
+          </article>
+        ))}
       </div>
-    ))}
-  </Carousel>
-);
+    </section>
+  );
+};
 
 export default Slider;
