@@ -1,53 +1,110 @@
-@import "typeface-raleway";
+/* ContactHome.scss */
+@import "@fontsource-variable/outfit";
 @import "typeface-poppins";
 
-$clr-text: #d4d4d4;
-$font-main: "Poppins", sans-serif;
-$bg-dark: #030D10;
+$bg-section: #000203;
+$bg-top: #02070a;
 
-.ContactHome {
-  background-color: $bg-dark;
+$text-strong: #cfd6df;
+$text-body: #b8c2cf;
+
+$font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+.contactHome {
+  position: relative;
+  width: 100%;
+  background: radial-gradient(120% 120% at 50% 0%, $bg-top 0%, $bg-section 55%);
+  color: $text-body;
   text-align: center;
-  padding: 4rem;
-  font-weight: 300;
-  color: $clr-text;
-  font-size: 1rem;
-  font-family: $font-main;
-  white-space: pre-line;
 
-  h3 {
-    display: inline-block;
-    white-space: pre-line;
-    padding-bottom: clamp(0.75rem, 2vw, 1.5rem);
-    margin: 0 auto clamp(1rem, 3vw, 2rem);
-    padding-bottom: 0.15rem;
-    font-family: $font-main;
-    font-weight: 300;
-    letter-spacing: 0.02rem;
-    font-size: clamp(1.5rem, 5vw, 2rem);
+  /* responsive spacing with safe-area support */
+  padding-block: clamp(2.25rem, 7vw, 6.5rem);
+  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
 
-    color: $clr-text;
-    border-bottom: 2px solid $clr-text;
+  display: grid;
+  place-items: center;
+  gap: clamp(0.75rem, 2.5vw, 1.25rem);
+}
+
+.missionTitle {
+  margin: 0;
+  color: $text-strong;
+  font-family: $font-heading;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  line-height: 1.14;
+  font-size: clamp(1.6rem, 3.2vw, 2.25rem);
+  max-width: 70ch;
+}
+
+.missionText {
+  margin: 0;
+  max-width: 70ch;
+  color: $text-body;
+  font-family: $font-body;
+  font-weight: 400;
+  letter-spacing: 0.003em;
+  line-height: 1.6;
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  white-space: normal;
+}
+
+/* reveal animation (already wired via useEffect) */
+.fadeUp {
+  opacity: 0;
+  transform: translateY(0.75rem);
+  filter: blur(0.125rem);
+  transition:
+    opacity 0.6s ease var(--delay),
+    transform 0.6s ease var(--delay),
+    filter 0.6s ease var(--delay);
+  will-change: transform, opacity, filter;
+}
+.contactHome.show .fadeUp {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* --- Responsive tweaks --- */
+
+/* Ultra-wide desktops */
+@media (min-width: 90rem) {
+  .contactHome { gap: 1.25rem; }
+  .missionText { max-width: 74ch; }
+}
+
+/* Tablets / small laptops */
+@media (max-width: 64rem) {
+  .contactHome { padding-block: clamp(2rem, 8vw, 3.75rem); }
+  .missionTitle { font-size: clamp(1.5rem, 3.8vw, 2rem); }
+  .missionText  { font-size: clamp(0.98rem, 1.6vw, 1.08rem); line-height: 1.58; }
+}
+
+/* Large phones / portrait tablets */
+@media (max-width: 48rem) {
+  .contactHome { gap: 1rem; }
+  .missionTitle { font-size: clamp(1.35rem, 5.6vw, 1.8rem); }
+  .missionText  { font-size: clamp(0.96rem, 4.2vw, 1.06rem); line-height: 1.56; }
+}
+
+/* Small phones */
+@media (max-width: 30rem) {
+  .contactHome {
+    padding-inline: max(0.75rem, env(safe-area-inset-left)) max(0.75rem, env(safe-area-inset-right));
+    gap: 0.875rem;
   }
+  .missionTitle { line-height: 1.2; }
+  .missionText  { line-height: 1.54; }
+}
 
-  p {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-
-    .email-icon {
-      font-size: 1.2rem;
-      color: #ffffff;
-    }
-
-    a {
-      color: $clr-text;
-      text-decoration: none;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .fadeUp {
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
   }
 }

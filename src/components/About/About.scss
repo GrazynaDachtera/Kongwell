@@ -1,126 +1,174 @@
+/* About.scss */
+@import "@fontsource-variable/outfit";
 @import "typeface-poppins";
 
-$clr-dark: #d4d4d4;
-$clr-card-bg: #030D10;
-$clr-subcard-bg: #344954c1;
-$clr-text-light: #d4d4d4;
-$font-main: "Poppins", sans-serif;
+$bg-overlay: #000203;
+$text-strong: #cfd6df;
+$text-body: #b8c2cf;
+
+$card-bg: rgba(10, 20, 22, 0.9);
+$card-border: rgba(255, 255, 255, 0.06);
+$card-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35);
+$card-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.35);
+
+$bullet-bg: rgba(52, 73, 84, 0.78);
+
+$font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 .containerSection {
   position: relative;
   min-height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(1.5rem, 4vw, 3rem);
-  background-image: url("/AboutComponent/3image.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  padding-block: clamp(2rem, 6vw, 6rem);
+  padding-inline: max(1rem, env(safe-area-inset-left));
+  display: grid;
+  place-items: start center;
+  background: url("/AboutComponent/3image.jpg") center / cover no-repeat;
 
   &::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: #030D10;
+    background: radial-gradient(120% 120% at 50% 0%, #02070a 0%, $bg-overlay 55%);
     z-index: 0;
   }
 
-  > * {
-    position: relative;
-    z-index: 1;
-  }
+  > * { position: relative; z-index: 1; }
+}
 
-  h3 {
-    font-family: $font-main;
-    font-weight: 300;
-    letter-spacing: 0.02rem;
-    color: $clr-text-light;
-    border-bottom: 2px solid $clr-text-light;
-    margin-bottom: clamp(1rem, 3vw, 2rem);
-    font-size: clamp(1.5rem, 5vw, 2rem);
-    text-align: center;
-  }
+.sectionTitle {
+  margin: 0 0 clamp(1.25rem, 3vw, 2rem);
+  text-align: center;
+  color: $text-strong;
+  font-family: $font-heading;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  font-size: clamp(1.6rem, 3.2vw, 2.25rem);
+}
 
-  .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: clamp(0.75rem, 2vw, 1rem);
-    width: 100%;
-  }
+.cardsGrid {
+  width: min(72rem, 100%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+}
 
-  .card {
-    flex: 1 1 clamp(250px, 45%, 500px);
-    max-width: clamp(250px, 45%, 500px);
-    display: flex;
-    flex-direction: column;
-    background: $clr-card-bg;
-    padding: 1rem;
-    border-radius: 1rem;
-    opacity: 0;
-    transform: translateY(20px);
-    transition:
-      opacity 0.6s ease var(--delay),
-      transform 0.6s ease var(--delay);
+.aboutCard {
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: 1rem;
+  box-shadow: $card-shadow;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition:
+    opacity 0.6s ease var(--delay),
+    transform 0.6s ease var(--delay),
+    box-shadow 250ms ease,
+    border-color 250ms ease;
+  will-change: transform, opacity;
 
-    h2 {
-      font-size: clamp(1rem, 3vw, 1.25rem);
-      margin-bottom: 0.5rem;
-      color: $clr-text-light;
-    }
-
-    p {
-      font-size: clamp(0.875rem, 2.5vw, 1rem);
-      line-height: 1.6;
-      color: $clr-text-light;
-    }
-
-    &.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .subCards {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(0.6rem, 2vw, 0.8rem);
-    margin-top: 1rem;
-  }
-
-  .subCard {
-    background: $clr-subcard-bg;
-    color: #16181a;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
-    padding: 0.75rem;
-    border-radius: 1rem;
-    font-size: clamp(0.8rem, 2.2vw, 0.95rem);
-    line-height: 1.6;
-  }
-
-  .card.show .subCard {
+  &.show {
     opacity: 1;
     transform: translateY(0);
   }
-  .card.show .subCard:nth-child(1) { transition-delay: 0.6s; }
-  .card.show .subCard:nth-child(2) { transition-delay: 1.2s; }
-  .card.show .subCard:nth-child(3) { transition-delay: 1.8s; }
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-0.25rem);
+    box-shadow: $card-shadow-lg;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
 }
 
-@media (max-width: 768px) {
-  .containerSection {
-    .row {
-      flex-direction: column;
-      gap: 1rem;
-    }
-    .card {
-      flex: 1 1 100%;
-      max-width: 100%;
-    }
+.cardTitle {
+  margin: 0 0 0.75rem;
+  color: $text-strong;
+  font-family: $font-heading;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  line-height: 1.14;
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+}
+
+.cardText {
+  color: $text-body;
+  font-family: $font-body;
+  font-weight: 400;
+  letter-spacing: 0.003em;
+  line-height: 1.6;
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
+  white-space: pre-line;
+  margin: 0;
+}
+
+.bulletList {
+  display: grid;
+  gap: clamp(0.75rem, 1.8vw, 1rem);
+  margin-top: clamp(0.75rem, 2vw, 1rem);
+}
+
+.bulletItem {
+  background: $bullet-bg;
+  border: none;
+  border-radius: 0.875rem;
+  padding: clamp(0.75rem, 2vw, 1rem);
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+
+  .bulletText {
+    margin: 0;
+    color: $text-strong;
+    font-family: $font-body;
+    font-weight: 400;
+    line-height: 1.6;
+    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+  }
+}
+
+/* stagger bullet items after card reveal */
+.aboutCard.show .bulletItem { opacity: 1; transform: translateY(0); }
+.aboutCard.show .bulletItem:nth-child(1) { transition-delay: 0.4s; }
+.aboutCard.show .bulletItem:nth-child(2) { transition-delay: 0.8s; }
+.aboutCard.show .bulletItem:nth-child(3) { transition-delay: 1.2s; }
+
+/* --- Responsive tweaks --- */
+@media (min-width: 90rem) { /* very wide desktops */
+  .cardsGrid { width: min(80rem, 100%); }
+}
+
+@media (max-width: 64rem) { /* tablets / small laptops */
+  .cardsGrid { grid-template-columns: 1fr; width: min(46rem, 100%); }
+  .containerSection { padding-block: clamp(1.75rem, 8vw, 3.5rem); }
+}
+
+@media (max-width: 48rem) { /* large phones / portrait tablets */
+  .aboutCard {
+    border-radius: 0.875rem;
+    padding: clamp(1rem, 5vw, 1.25rem);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.28);
+  }
+  .cardTitle { font-size: clamp(1.15rem, 5.2vw, 1.4rem); }
+  .cardText  { font-size: clamp(0.96rem, 4.2vw, 1.06rem); line-height: 1.58; }
+  .bulletItem { border-radius: 0.75rem; }
+  .bulletItem .bulletText { font-size: clamp(0.92rem, 3.8vw, 1rem); }
+}
+
+@media (max-width: 30rem) { /* small phones */
+  .containerSection { padding-inline: max(0.75rem, env(safe-area-inset-left)); }
+  .cardsGrid { gap: 0.875rem; }
+  .cardText { line-height: 1.55; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aboutCard,
+  .bulletItem {
+    transition: none !important;
+    transform: none !important;
+    opacity: 1 !important;
   }
 }

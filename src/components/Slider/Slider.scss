@@ -4,30 +4,28 @@
 
 $bg-section: #000203;
 $bg-top: #02070a;
-$divider: rgba(255, 255, 255, 0.06);
 
-$card-bg: #f6f8fa;
-$card-border: rgba(17, 27, 33, 0.08);
-$card-text: #0f1a1e;
-$card-muted: #33464f;
+$text-strong: #cfd6df;
+$text-body: #b8c2cf;
 
-$shadow-sm: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.18);
-$shadow-lg: 0 1.25rem 3.125rem rgba(0, 0, 0, 0.45);
+$card-bg: rgba(10, 20, 22, 0.9);
+$card-border: rgba(255, 255, 255, 0.06);
+$card-shadow-sm: 0 0.75rem 2rem rgba(0, 0, 0, 0.28);
+$card-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.35);
 
 $font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, "Inter Variable", sans-serif;
 $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-$green-dark: #0a3d2e;
-$green-mid:  #0a3d2e37;
-$green-bright: #0a3d2e00;
-
 .kongwellSlider {
   position: relative;
   isolation: isolate;
+  z-index: 0;
   width: 100%;
   background: radial-gradient(120% 120% at 50% 0%, $bg-top 0%, $bg-section 55%);
-  padding-block: clamp(3.5rem, 8vw, 7rem);
-  border-top: 0.0625rem solid $divider;
+  padding-block: clamp(2.25rem, 7vw, 6rem);
+  padding-inline: max(1rem, env(safe-area-inset-left));
+  margin-top: -1px;
+  border-top: 0;
 
   &::before {
     content: "";
@@ -42,9 +40,9 @@ $green-bright: #0a3d2e00;
   .sliderGrid {
     position: relative;
     z-index: 1;
-    max-width: 72rem;
+    width: min(72rem, 100%);
     margin-inline: auto;
-    padding-inline: clamp(1rem, 4vw, 2rem);
+    padding-inline: clamp(0.75rem, 4vw, 2rem);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(1rem, 3vw, 2rem);
@@ -52,11 +50,11 @@ $green-bright: #0a3d2e00;
 
   .sliderCard {
     background: $card-bg;
-    color: $card-text;
+    color: $text-body;
     border: 0.0625rem solid $card-border;
     border-radius: 1rem;
-    padding: clamp(1.35rem, 2.8vw, 2rem);
-    box-shadow: $shadow-sm;
+    padding: clamp(1.1rem, 2.4vw, 1.6rem);
+    box-shadow: $card-shadow-sm;
     transform: translateY(0.75rem);
     opacity: 0;
     filter: blur(0.125rem);
@@ -77,59 +75,66 @@ $green-bright: #0a3d2e00;
     &:hover,
     &:focus-within {
       transform: translateY(-0.25rem);
-      box-shadow: $shadow-lg;
-      border-color: rgba(17, 27, 33, 0.16);
+      box-shadow: $card-shadow-lg;
+      border-color: rgba(255, 255, 255, 0.12);
     }
   }
 
   .sliderTitle {
     font-family: $font-heading;
+    color: $text-strong;
     font-weight: 750;
     letter-spacing: -0.01em;
     line-height: 1.14;
-    font-size: clamp(1.35rem, 2.4vw, 1.7rem);
-    margin: 0 0 0.85rem 0;
-    position: relative;
-    width: fit-content;
-    color: #1f3139;
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -0.4rem;
-      height: 0.1875rem;
-      background: linear-gradient(90deg, $green-dark 0%, $green-mid 55%, $green-bright 100%);
-      border-radius: 0.1875rem;
-    }
+    font-size: clamp(1.15rem, 2.1vw, 1.5rem);
+    margin: 0 0 0.75rem 0;
   }
 
   .sliderText {
     font-family: $font-desc;
-    color: $card-muted;
+    color: $text-body;
     font-weight: 400;
     letter-spacing: 0.003em;
-    line-height: 1.6; /* was 1.75 */
-    font-size: clamp(1.02rem, 1.45vw, 1.12rem);
-    margin: 0.9rem 0 0 0;
+    line-height: 1.6;
+    font-size: clamp(0.98rem, 1.35vw, 1.1rem);
+    margin: 0;
     max-width: 62ch;
 
     strong {
+      color: $text-strong;
       font-weight: 600;
-      color: #1f3139;
     }
   }
 }
 
+@media (min-width: 90rem) {
+  .kongwellSlider .sliderGrid { width: min(80rem, 100%); }
+}
+
 @media (max-width: 64rem) {
-  .sliderGrid {
-    grid-template-columns: 1fr;
+  .kongwellSlider .sliderGrid { grid-template-columns: 1fr; width: min(46rem, 100%); }
+  .kongwellSlider { padding-block: clamp(2rem, 8vw, 3.5rem); }
+}
+
+@media (max-width: 48rem) {
+  .kongwellSlider .sliderCard {
+    border-radius: 0.875rem;
+    padding: clamp(0.95rem, 5vw, 1.25rem);
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.28);
   }
+  .kongwellSlider .sliderTitle { font-size: clamp(1.05rem, 5.2vw, 1.35rem); }
+  .kongwellSlider .sliderText  { font-size: clamp(0.96rem, 4.2vw, 1.06rem); line-height: 1.58; }
+}
+
+@media (max-width: 30rem) {
+  .kongwellSlider { padding-inline: max(0.75rem, env(safe-area-inset-left)); }
+  .kongwellSlider .sliderGrid { gap: 0.875rem; padding-inline: 0.75rem; }
+  .kongwellSlider .sliderCard { border-radius: 0.75rem; }
+  .kongwellSlider .sliderText { line-height: 1.55; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sliderCard {
+  .kongwellSlider .sliderCard {
     transition: none !important;
     transform: none !important;
     filter: none !important;

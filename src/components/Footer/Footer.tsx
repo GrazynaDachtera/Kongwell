@@ -4,13 +4,13 @@ import Image from "next/image";
 import "./Footer.scss";
 
 const FooterFirstSection = () => (
-  <div className="footer-first-section">
+  <div className="footerFirst">
     <Image
-      src="/Footer/KongwellFooter.png"
+      src="/Footer/gorilla.svg"
       alt="Kongwell logo"
-      width={180}
-      height={50}
-      className="footer-logo"
+      width={220}
+      height={160}
+      className="footerLogo"
       priority
     />
   </div>
@@ -29,17 +29,19 @@ const FooterSecondSection = () => {
   ];
 
   return (
-    <div className="footer-second-section">
-      <div className="footer-address-wrapper">
-        <div className="footer-address-content">
+    <div className="footerSecond">
+      <div className="footerAddressWrap">
+        <div className="footerAddress">
           {address.map((item, idx) => (
             <div key={idx}>
-              <h4 className="footer-address-header">{item.header}</h4>
-              <p className="footer-address-street">{item.address}</p>
-              <p className="footer-address-email">{item.email}</p>
-              <p className="footer-nip">{item.NIP}</p>
-              <p className="footer-krs">{item.KRS}</p>
-              <p className="footer-acer">{item.ACER}</p>
+              <h4 className="footerHeading">{item.header}</h4>
+              <p className="footerLine">{item.address}</p>
+              <p className="footerLine">
+                <a href="mailto:inquiries@kongwell.com">{item.email}</a>
+              </p>
+              <p className="footerLine">{item.NIP}</p>
+              <p className="footerLine">{item.KRS}</p>
+              <p className="footerLine">{item.ACER}</p>
             </div>
           ))}
         </div>
@@ -49,35 +51,39 @@ const FooterSecondSection = () => {
 };
 
 const FooterThirdSection = () => (
-  <div className="footer-third-section">
-    <p className="footer-disclaimer">
+  <div className="footerThird">
+    <p className="footerDisclaimer">
       Kongwell Energy Trading trades solely with proprietary capital and does
       not solicit or accept external investors. The information on this website
       is provided for regulatory and informational purposes only and does not
       constitute investment advice or an offer to deal in any financial
       instrument.
     </p>
-    <div className="footer-third-right">
-      Contact:
+
+    <p className="footerContact">
+      Contact{" "}
       <a
-        href="https://mail.google.com/mail/?view=cm&fs=1&to=inquiries@kongwell.com"
-        target="_blank"
+        href="mailto:inquiries@kongwell.com"
         rel="noopener noreferrer"
+        aria-label="Email inquiries@kongwell.com"
       >
         inquiries@kongwell.com
       </a>
-    </div>
+    </p>
   </div>
 );
 
 const Footer = () => (
-  <div className="footer-main-container">
-    <FooterFirstSection />
-    <hr className="footer-divider" />
-    <FooterSecondSection />
-    <hr className="footer-divider" />
+  <footer className="footerContainer" aria-label="Site footer">
+    <div className="footerInner">
+      <FooterFirstSection />
+      <FooterSecondSection />
+    </div>
+
+    <hr className="footerRule" />
+
     <FooterThirdSection />
-  </div>
+  </footer>
 );
 
 export default Footer;

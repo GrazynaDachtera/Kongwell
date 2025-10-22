@@ -1,18 +1,18 @@
+// About.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
+import type { CSSProperties } from "react";
 import "./About.scss";
 
 type Milestone =
-  | {
-      title: string;
-      intro: string;
-      bullets: string[];
-    }
-  | {
-      title: string;
-      content: string;
-    };
+  | { title: string; intro: string; bullets: string[] }
+  | { title: string; content: string };
+
+type CSSVars = CSSProperties & { ["--delay"]?: string };
+
+const BASE_DELAY_S = 0.3; // extra wait before first card animates
+const STAGGER_S = 0.3; // per-card stagger (unchanged)
 
 const milestones: Milestone[] = [
   {
@@ -40,7 +40,6 @@ const About = () => {
 
   useEffect(() => {
     const elements = refs.current;
-
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -50,43 +49,52 @@ const About = () => {
           }
         });
       },
-      { threshold: 0.1 }
+      {
+        threshold: 0.3, // require ~35% visibility
+        rootMargin: "0px 0px -10% 0px", // reveal a touch later near bottom edge
+      }
     );
 
     elements.forEach((el) => el && observer.observe(el));
     return () => elements.forEach((el) => el && observer.unobserve(el));
   }, []);
 
-  return (
-    <section className="containerSection">
-      <h3>Powering Transparent Markets</h3>
+  const styleWithDelay = (i: number): CSSVars => ({
+    "--delay": `${BASE_DELAY_S + i * STAGGER_S}s`,
+  });
 
-      <div className="row">
+  return (
+    <section
+      className="containerSection"
+      aria-label="Powering Transparent Markets"
+    >
+      <h3 className="sectionTitle">Powering Transparent Markets</h3>
+
+      <div className="cardsGrid">
         {milestones.map((m, i) => (
           <div
             key={m.title}
-            className="card"
-            style={{ "--delay": `${i * 0.3}s` } as React.CSSProperties}
+            className="aboutCard"
+            style={styleWithDelay(i)}
             ref={(el) => {
               if (el) refs.current[i] = el;
             }}
           >
-            <h2>{m.title}</h2>
+            <h2 className="cardTitle">{m.title}</h2>
 
             {"bullets" in m ? (
               <>
-                <p>{m.intro}</p>
-
-                <div className="subCards">
+                <p className="cardText">{m.intro}</p>
+                <div className="bulletList">
                   {m.bullets.map((text, j) => (
-                    <div key={j} className="subCard">
-                      <p>{text}</p>
+                    <div key={j} className="bulletItem">
+                      <p className="bulletText">{text}</p>
                     </div>
                   ))}
                 </div>
               </>
             ) : (
-              <p>{m.content}</p>
+              <p className="cardText">{m.content}</p>
             )}
           </div>
         ))}
