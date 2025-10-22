@@ -3,11 +3,11 @@
   position: fixed;
   top: 1.25rem;   /* same offset you used previously */
   left: 1.25rem;
-  z-index: 10000;
+  z-index: 99999999;
   line-height: 0; /* removes extra inline gap */
   background: transparent;
 }
 
 .brand-mark img {
-  display: block; /* avoid inline baseline gap */
+  display: flex; /* avoid inline baseline gap */
 }

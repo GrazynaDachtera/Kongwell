@@ -1,25 +1,49 @@
+/* Slider.scss */
 @import "@fontsource-variable/outfit";
 @import "@fontsource-variable/inter";
+@import "typeface-poppins";
 
-$bg-section: #0b1416;
-$card-bg: #f2f5f7;
+$bg-section: #000203;
+$bg-top: #02070a;
+$divider: rgba(255, 255, 255, 0.06);
+
+$card-bg: #f6f8fa;
+$card-border: rgba(17, 27, 33, 0.08);
 $card-text: #0f1a1e;
-$card-muted: #374151;
-$shadow-1: rgba(0, 0, 0, 0.35);
-$shadow-2: rgba(0, 0, 0, 0.18);
+$card-muted: #33464f;
+
+$shadow-sm: 0 0.125rem 0.75rem rgba(0, 0, 0, 0.18);
+$shadow-lg: 0 1.25rem 3.125rem rgba(0, 0, 0, 0.45);
 
 $font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, "Inter Variable", sans-serif;
-$font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-.KongwellSlider {
+$green-dark: #0a3d2e;
+$green-mid:  #0a3d2e37;
+$green-bright: #0a3d2e00;
+
+.kongwellSlider {
   position: relative;
+  isolation: isolate;
   width: 100%;
-  background:
-    #010405;
-  padding-block: clamp(4rem, 12vw, 8rem);
+  background: radial-gradient(120% 120% at 50% 0%, $bg-top 0%, $bg-section 55%);
+  padding-block: clamp(3.5rem, 8vw, 7rem);
+  border-top: 0.0625rem solid $divider;
 
-  .cards {
-    max-width: 80rem;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: min(18vh, 13.75rem);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0));
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .sliderGrid {
+    position: relative;
+    z-index: 1;
+    max-width: 72rem;
     margin-inline: auto;
     padding-inline: clamp(1rem, 4vw, 2rem);
     display: grid;
@@ -27,81 +51,86 @@ $font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans
     gap: clamp(1rem, 3vw, 2rem);
   }
 
-  .card {
+  .sliderCard {
     background: $card-bg;
     color: $card-text;
+    border: 0.0625rem solid $card-border;
     border-radius: 1rem;
-    padding: clamp(1.25rem, 3vw, 2rem);
-    box-shadow:
-      0 1rem 3rem $shadow-1,
-      0 0.125rem 0.5rem $shadow-2;
-    border: 0.0625rem solid rgba(15, 26, 30, 0.06);
-    transform: translateY(0);
-    transition: transform 280ms ease, box-shadow 280ms ease;
+    padding: clamp(1.35rem, 2.8vw, 2rem);
+    box-shadow: $shadow-sm;
+    transform: translateY(0.75rem);
+    opacity: 0;
+    filter: blur(0.125rem);
+    transition:
+      opacity 0.6s ease var(--delay),
+      transform 0.6s ease var(--delay),
+      filter 0.6s ease var(--delay),
+      box-shadow 250ms ease,
+      border-color 250ms ease;
+    will-change: transform, opacity, filter;
+
+    &.show {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    &:hover,
+    &:focus-within {
+      transform: translateY(-0.25rem);
+      box-shadow: $shadow-lg;
+      border-color: rgba(17, 27, 33, 0.16);
+    }
   }
 
-  .card:hover {
-    transform: translateY(-0.25rem);
-    box-shadow:
-      0 1.25rem 3.5rem $shadow-1,
-      0 0.25rem 0.75rem $shadow-2;
-  }
-
-  .card-title {
+  .sliderTitle {
     font-family: $font-heading;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    line-height: 1.15;
-    font-size: clamp(1.25rem, 2.6vw, 1.75rem);
-    margin: 0 0 0.75rem 0;
+    font-weight: 750;
+    letter-spacing: -0.01em;
+    line-height: 1.14;
+    font-size: clamp(1.35rem, 2.4vw, 1.7rem);
+    margin: 0 0 0.85rem 0;
     position: relative;
     width: fit-content;
+    color: #1f3139;
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -0.4rem;
+      height: 0.1875rem;
+      background: linear-gradient(90deg, $green-dark 0%, $green-mid 55%, $green-bright 100%);
+      border-radius: 0.1875rem;
+    }
   }
 
-  .card-title::after {
-    content: "";
-    display: block;
-    height: 0.125rem;
-    width: 60%;
-    background: rgba(15, 26, 30, 0.18);
-    margin-top: 0.4rem;
-    border-radius: 0.125rem;
-  }
-
-  .card-text {
-    font-family: $font-body;
+  .sliderText {
+    font-family: $font-desc;
     color: $card-muted;
-    font-weight: 480;
-    letter-spacing: 0.005em;
-    line-height: 1.7;
-    font-size: clamp(0.98rem, 1.6vw, 1.06rem);
-    margin: 0;
-    max-width: 65ch;
-  }
+    font-weight: 400;
+    letter-spacing: 0.003em;
+    line-height: 1.75;
+    font-size: clamp(1.02rem, 1.45vw, 1.12rem);
+    margin: 0.9rem 0 0 0;
+    max-width: 62ch;
 
-  .fade-up {
-    opacity: 0;
-    transform: translateY(0.5rem);
-    filter: blur(0.125rem);
-    transition: opacity 600ms ease, transform 600ms ease, filter 600ms ease;
-  }
-
-  &.animate .fade-up {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
+    strong {
+      font-weight: 600;
+      color: #1f3139;
+    }
   }
 }
 
 @media (max-width: 64rem) {
-  .KongwellSlider .cards {
+  .sliderGrid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .KongwellSlider .fade-up,
-  .KongwellSlider.animate .fade-up {
+  .sliderCard {
     transition: none !important;
     transform: none !important;
     filter: none !important;
