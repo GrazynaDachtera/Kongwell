@@ -10,6 +10,9 @@ $text-body: #b8c2cf;
 $font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
+/* match About section spacing token */
+$title_cards_gap: clamp(1.25rem, 3vw, 2rem);
+
 .contactHome {
   position: relative;
   isolation: isolate;
@@ -19,12 +22,17 @@ $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   min-height: 50vh;
   background: radial-gradient(120% 120% at 50% 0%, $bg-top 0%, $bg-section 55%);
   color: $text-body;
-  text-align: center;
-  padding-block: clamp(2.25rem, 7vw, 6.5rem);
-  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
+
+  /* exact same layout behaviour as About: title on top, then content with the same gap */
   display: grid;
-  place-items: center;
-  gap: clamp(0.75rem, 2.5vw, 1.25rem);
+  place-items: start center;     /* align-items:start; justify-items:center */
+  place-content: start center;   /* prevent grid rows from stretching on tall mobile screens */
+  grid-auto-rows: max-content;   /* rows hug their content */
+  gap: $title_cards_gap;
+
+  text-align: center;
+  padding-block: clamp(2rem, 6vw, 6rem);
+  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
   margin-top: -1px;
   border-top: 0;
   background-clip: padding-box;
@@ -77,31 +85,28 @@ $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 }
 
 @media (min-width: 90rem) {
-  .contactHome { gap: 1.25rem; }
   .missionText { max-width: 74ch; }
 }
 
 @media (max-width: 64rem) {
-  .contactHome { padding-block: clamp(2rem, 8vw, 3.75rem); }
+  .contactHome { padding-block: clamp(1.75rem, 8vw, 3.5rem); }
   .missionText  { font-size: clamp(0.98rem, 1.6vw, 1.08rem); line-height: 1.58; }
 }
 
 @media (max-width: 48rem) {
-  .contactHome { gap: 1rem; }
   .missionText  { font-size: clamp(0.96rem, 4.2vw, 1.06rem); line-height: 1.56; }
 }
 
 @media (max-width: 30rem) {
   .contactHome {
     padding-inline: max(0.75rem, env(safe-area-inset-left)) max(0.75rem, env(safe-area-inset-right));
-    gap: 0.875rem;
   }
   .missionTitle { line-height: 1.2; }
   .missionText  { line-height: 1.54; }
 }
 
 @media (orientation: landscape) and (max-height: 30rem) {
-  .contactHome { min-height: auto; padding-block: 1.25rem; gap: 0.75rem; }
+  .contactHome { min-height: auto; padding-block: 1.25rem; }
   .missionText { line-height: 1.5; }
 }
 
