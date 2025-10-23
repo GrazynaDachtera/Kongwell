@@ -9,22 +9,27 @@ $font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, 
 $font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 .KongwellHeader {
+  --padY: clamp(2.5rem, 10vw, 7rem);
+  --padX: clamp(1rem, 4vw, 2rem);
+
   position: relative;
   z-index: 10;
   width: 100%;
-  min-height: inherit;
+  min-height: 60svh;
+  min-height: 60vh;
   display: grid;
   place-items: center;
-  padding: clamp(4rem, 12vw, 8rem) 1rem;
-  margin-bottom: 0;
+  padding-block: calc(var(--padY) + env(safe-area-inset-top)) calc(var(--padY) + env(safe-area-inset-bottom));
+  padding-inline: var(--padX);
+  margin: 0;
 
   .content {
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 80rem;
-    padding-inline: 1rem;
+    max-width: min(80rem, 92vw);
     margin-inline: auto;
+    padding-inline: 0;
   }
 
   .title,
@@ -39,8 +44,11 @@ $font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans
     font-weight: 650;
     letter-spacing: 0.01em;
     line-height: 1.08;
-    font-size: clamp(1.8rem, 4.8vw, 4rem);
+    font-size: clamp(1.8rem, 4.8vw, 4.25rem);
+    max-width: 20ch;
+    margin-inline: auto;
     margin-bottom: 0.5rem;
+    text-wrap: balance;
   }
 
   .description {
@@ -50,11 +58,12 @@ $font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans
     letter-spacing: 0.01em;
     line-height: 1.5;
     opacity: 0.94;
-    font-size: clamp(1.05rem, 2.2vw, 1.45rem);
-    max-width: 58ch;
+    font-size: clamp(1rem, 1.2vw + 0.75rem, 1.5rem);
+    max-width: 60ch;
     margin-inline: auto;
     margin-top: 0.65rem;
     text-shadow: 0 0.0625rem 0.5rem $clr-shadow;
+    text-wrap: pretty;
   }
 
   .fade-up {
@@ -62,6 +71,7 @@ $font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans
     transform: translateY(0.5rem) scale(0.985);
     filter: blur(0.125rem);
     transition: opacity 700ms ease, transform 700ms ease, filter 700ms ease;
+    will-change: transform, opacity, filter;
   }
 
   .animate .fade-up {
@@ -81,20 +91,32 @@ $font-body: "Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans
   }
 }
 
-@media (max-width: 48rem) {
-  .KongwellHeader .title {
-    font-size: clamp(1.75rem, 6vw, 3.2rem);
-  }
-  .KongwellHeader .description {
-    font-size: clamp(1rem, 3.8vw, 1.15rem);
+@media (max-width: 22rem) {
+  .KongwellHeader {
+    --padY: clamp(2rem, 8vw, 3rem);
+    .title { font-size: clamp(1.5rem, 7vw, 2rem); }
+    .description { font-size: clamp(0.95rem, 4.5vw, 1.05rem); }
   }
 }
 
-@media (max-width: 30rem) {
+@media (max-width: 48rem) {
   .KongwellHeader .title {
-    font-size: clamp(1.6rem, 7.5vw, 2.2rem);
+    font-size: clamp(1.7rem, 6vw, 3.2rem);
   }
   .KongwellHeader .description {
-    font-size: clamp(0.98rem, 4.6vw, 1.08rem);
+    font-size: clamp(0.98rem, 3.8vw, 1.15rem);
   }
+}
+
+@media (orientation: landscape) and (max-height: 30rem) {
+  .KongwellHeader {
+    min-height: auto;
+    --padY: clamp(1.5rem, 6vw, 2.5rem);
+    .title { margin-bottom: 0.25rem; }
+  }
+}
+
+@media (min-width: 90rem) {
+  .KongwellHeader .title { font-size: clamp(3rem, 3.4vw, 4.75rem); }
+  .KongwellHeader .description { font-size: clamp(1.15rem, 1.4vw, 1.6rem); }
 }

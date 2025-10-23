@@ -16,6 +16,16 @@ export default function ContactHome() {
     const node = sectionRef.current;
     if (!node) return;
 
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReduced) {
+      node.classList.add("show");
+      return;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -31,8 +41,16 @@ export default function ContactHome() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="contactHome" aria-label="Our Mission">
-      <h3 className="missionTitle">Our Mission is simple</h3>
+    <section
+      ref={sectionRef}
+      className="contactHome"
+      aria-label="Our Mission"
+      aria-labelledby="mission-title"
+      role="region"
+    >
+      <h3 id="mission-title" className="missionTitle">
+        Our Mission is simple
+      </h3>
 
       <h4
         className="missionText fadeUp"

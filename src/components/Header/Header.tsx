@@ -12,14 +12,18 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <section className="KongwellHeader" aria-label="Kongwell Energy Trading">
+    <header
+      className="KongwellHeader"
+      aria-label="Kongwell Energy Trading"
+      role="banner"
+    >
       <div className={`content ${animate ? "animate" : ""}`}>
         <h1 className="title fade-up">Kongwell Energy Trading</h1>
         <p className="description fade-up">
           Driving liquidity and efficiency in European energy markets.
         </p>
       </div>
-    </section>
+    </header>
   );
 };
 

@@ -15,17 +15,17 @@ $bullet-bg: rgba(52, 73, 84, 0.78);
 $font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-/* —— spacing token to match Slider —— */
 $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 
 .containerSection {
   position: relative;
   isolation: isolate;
   z-index: 0;
+  min-height: 100svh;
   min-height: 100vh;
   width: 100%;
   padding-block: clamp(2rem, 6vw, 6rem);
-  padding-inline: max(1rem, env(safe-area-inset-left));
+  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
   display: grid;
   place-items: start center;
   background: url("/AboutComponent/3image.jpg") center / cover no-repeat;
@@ -47,27 +47,31 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
     backface-visibility: hidden;
   }
 
-  > * { position: relative; z-index: 1; }
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 .sectionTitle {
-  margin: 0; /* reset */
+  margin: 0;
   text-align: center;
   color: $text-strong;
   font-family: $font-heading;
   font-weight: 750;
   letter-spacing: -0.01em;
   font-size: clamp(1.6rem, 3.2vw, 2.25rem);
+  text-wrap: balance;
 }
 
-/* Apply the exact gap below the title via the grid */
 .cardsGrid {
   width: min(72rem, 100%);
   margin-inline: auto;
-  margin-top: $title_cards_gap; /* 👈 same as Slider */
+  margin-top: $title_cards_gap;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
   gap: clamp(1rem, 3vw, 2rem);
+  align-items: start;
 }
 
 .aboutCard {
@@ -84,6 +88,8 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
     box-shadow 250ms ease,
     border-color 250ms ease;
   will-change: transform, opacity;
+  outline: none;
+  contain: layout paint style;
 
   &.show {
     opacity: 1;
@@ -96,6 +102,11 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
     box-shadow: $card-shadow-lg;
     border-color: rgba(255, 255, 255, 0.12);
   }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 0.125rem rgba(255, 255, 255, 0.2), $card-shadow-lg;
+    border-color: rgba(255, 255, 255, 0.22);
+  }
 }
 
 .cardTitle {
@@ -106,6 +117,7 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
   letter-spacing: -0.01em;
   line-height: 1.14;
   font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  text-wrap: balance;
 }
 
 .cardText {
@@ -117,6 +129,9 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
   font-size: clamp(1rem, 1.4vw, 1.125rem);
   white-space: pre-line;
   margin: 0;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+  text-wrap: pretty;
 }
 
 .bulletList {
@@ -155,7 +170,6 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 @media (max-width: 64rem) {
-  .cardsGrid { grid-template-columns: 1fr; width: min(46rem, 100%); }
   .containerSection { padding-block: clamp(1.75rem, 8vw, 3.5rem); }
 }
 
@@ -172,9 +186,32 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 @media (max-width: 30rem) {
-  .containerSection { padding-inline: max(0.75rem, env(safe-area-inset-left)); }
+  .containerSection { padding-inline: max(0.75rem, env(safe-area-inset-left)) max(0.75rem, env(safe-area-inset-right)); }
   .cardsGrid { gap: 0.875rem; }
   .cardText { line-height: 1.55; }
+}
+
+@media (orientation: landscape) and (max-height: 30rem) {
+  .containerSection { min-height: auto; padding-block: 1.25rem; }
+  .cardsGrid { gap: 0.75rem; }
+  .aboutCard { padding: 0.9rem; }
+}
+
+@media (pointer: coarse) {
+  .aboutCard {
+    transform: none;
+  }
+  .aboutCard:hover,
+  .aboutCard:focus-within {
+    transform: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .aboutCard {
+    border-color: rgba(255, 255, 255, 0.18);
+    box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.45);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

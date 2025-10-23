@@ -23,6 +23,15 @@ function useRevealOnIntersect(threshold = 0.1) {
   const refs = useRef<HTMLElement[]>([]);
   useEffect(() => {
     if (!refs.current.length) return;
+    const els = refs.current.filter(Boolean);
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) {
+      els.forEach((el) => el.classList.add("show"));
+      return;
+    }
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -32,9 +41,9 @@ function useRevealOnIntersect(threshold = 0.1) {
           }
         });
       },
-      { threshold }
+      { threshold, rootMargin: "0px 0px -10% 0px" }
     );
-    refs.current.forEach((el) => el && observer.observe(el));
+    els.forEach((el) => el && observer.observe(el));
     return () => observer.disconnect();
   }, [threshold]);
   return refs;
@@ -50,8 +59,15 @@ export default function Slider() {
   });
 
   return (
-    <section className="kongwellSlider" aria-label="About Kongwell">
-      <h3 className="sliderSectionTitle">About Kongwell</h3>
+    <section
+      className="kongwellSlider"
+      aria-label="About Kongwell"
+      aria-labelledby="about-kongwell-title"
+      role="region"
+    >
+      <h3 id="about-kongwell-title" className="sliderSectionTitle">
+        About Kongwell
+      </h3>
 
       <div className="sliderGrid">
         {slides.map(({ title, text }, i) => (
@@ -60,6 +76,8 @@ export default function Slider() {
             className="sliderCard"
             style={styleWithDelay(i)}
             ref={setRefAt(i)}
+            tabIndex={0}
+            aria-label={title}
           >
             <h3 className="sliderTitle">{title}</h3>
             <p

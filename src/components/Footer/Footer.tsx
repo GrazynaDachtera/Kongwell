@@ -4,7 +4,7 @@ import Image from "next/image";
 import "./Footer.scss";
 
 const FooterFirstSection = () => (
-  <div className="footerFirst">
+  <div className="footerFirst" aria-hidden="true">
     <Image
       src="/Footer/gorilla.svg"
       alt="Kongwell logo"
@@ -31,20 +31,24 @@ const FooterSecondSection = () => {
   return (
     <div className="footerSecond">
       <div className="footerAddressWrap">
-        <div className="footerAddress">
-          {address.map((item, idx) => (
-            <div key={idx}>
-              <h4 className="footerHeading">{item.header}</h4>
-              <p className="footerLine">{item.address}</p>
-              <p className="footerLine">
-                <a href="mailto:inquiries@kongwell.com">{item.email}</a>
-              </p>
-              <p className="footerLine">{item.NIP}</p>
-              <p className="footerLine">{item.KRS}</p>
-              <p className="footerLine">{item.ACER}</p>
-            </div>
-          ))}
-        </div>
+        {address.map((item, idx) => (
+          <address className="footerAddress" key={idx}>
+            <h4 className="footerHeading">{item.header}</h4>
+            <p className="footerLine">{item.address}</p>
+            <p className="footerLine">
+              <a
+                href="mailto:inquiries@kongwell.com"
+                aria-label="Email inquiries@kongwell.com"
+                className="footerEmail"
+              >
+                {item.email}
+              </a>
+            </p>
+            <p className="footerLine">{item.NIP}</p>
+            <p className="footerLine">{item.KRS}</p>
+            <p className="footerLine">{item.ACER}</p>
+          </address>
+        ))}
       </div>
     </div>
   );
@@ -74,7 +78,11 @@ const FooterThirdSection = () => (
 );
 
 const Footer = () => (
-  <footer className="footerContainer" aria-label="Site footer">
+  <footer
+    className="footerContainer"
+    aria-label="Site footer"
+    role="contentinfo"
+  >
     <div className="footerInner">
       <FooterFirstSection />
       <FooterSecondSection />

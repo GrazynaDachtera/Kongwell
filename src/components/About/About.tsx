@@ -1,4 +1,3 @@
-// About.tsx
 "use client";
 
 import { useEffect, useRef } from "react";
@@ -11,8 +10,8 @@ type Milestone =
 
 type CSSVars = CSSProperties & { ["--delay"]?: string };
 
-const BASE_DELAY_S = 0.3; // extra wait before first card animates
-const STAGGER_S = 0.3; // per-card stagger (unchanged)
+const BASE_DELAY_S = 0.3;
+const STAGGER_S = 0.3;
 
 const milestones: Milestone[] = [
   {
@@ -35,11 +34,23 @@ Transparent governance framework, with formal policies for risk management and p
   },
 ];
 
-const About = () => {
+export default function About() {
   const refs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    const elements = refs.current;
+    const elements = refs.current.filter(Boolean);
+    if (!elements.length) return;
+
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReduced) {
+      elements.forEach((el) => el.classList.add("show"));
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -49,14 +60,11 @@ const About = () => {
           }
         });
       },
-      {
-        threshold: 0.3, // require ~35% visibility
-        rootMargin: "0px 0px -10% 0px", // reveal a touch later near bottom edge
-      }
+      { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
     );
 
-    elements.forEach((el) => el && observer.observe(el));
-    return () => elements.forEach((el) => el && observer.unobserve(el));
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   const styleWithDelay = (i: number): CSSVars => ({
@@ -67,8 +75,12 @@ const About = () => {
     <section
       className="containerSection"
       aria-label="Powering Transparent Markets"
+      aria-labelledby="transparent-markets-title"
+      role="region"
     >
-      <h3 className="sectionTitle">Powering Transparent Markets</h3>
+      <h3 id="transparent-markets-title" className="sectionTitle">
+        Powering Transparent Markets
+      </h3>
 
       <div className="cardsGrid">
         {milestones.map((m, i) => (
@@ -79,6 +91,8 @@ const About = () => {
             ref={(el) => {
               if (el) refs.current[i] = el;
             }}
+            tabIndex={0}
+            aria-label={m.title}
           >
             <h2 className="cardTitle">{m.title}</h2>
 
@@ -101,6 +115,4 @@ const About = () => {
       </div>
     </section>
   );
-};
-
-export default About;
+}
