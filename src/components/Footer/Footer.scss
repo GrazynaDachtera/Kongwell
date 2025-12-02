@@ -9,11 +9,25 @@ $text-muted: #9aa7af;
 
 $divider: rgba(255, 255, 255, 0.12);
 
+$focus: rgba(214, 221, 227, 0.65);
+
 $font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto,
   sans-serif;
 $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 $edge-offset: 1.25rem;
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
 .footerContainer {
   position: relative;
@@ -29,10 +43,7 @@ $edge-offset: 1.25rem;
   padding-right: max($edge-offset, env(safe-area-inset-right));
   font-family: $font-body;
   line-height: 1.5;
-  box-shadow: none;
   overflow: hidden;
-  background-clip: padding-box;
-  outline: none;
   border: 0;
 }
 
@@ -98,13 +109,12 @@ $edge-offset: 1.25rem;
   filter: drop-shadow(0 10px 26px rgba(0, 0, 0, 0.45));
 }
 
-.footerAddressWrap {
-  display: grid;
-  align-items: start;
+.footerSecond,
+.footerAddress {
+  min-width: 0;
 }
 
 .footerAddress {
-  flex: 1;
   font-style: normal;
 }
 
@@ -126,22 +136,46 @@ $edge-offset: 1.25rem;
   overflow-wrap: anywhere;
   hyphens: auto;
   text-wrap: pretty;
+}
 
-  a {
-    color: $text-strong;
-    text-decoration: none;
-    border-bottom: 1px dashed transparent;
-    transition: color 160ms ease, border-color 160ms ease;
+.footerLink {
+  color: $text-strong;
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+  transition: border-color 160ms ease, outline-color 160ms ease;
+
+  &:hover {
+    border-color: $text-strong;
   }
 
-  a:hover,
-  a:focus-visible {
-    border-color: $text-strong;
-    outline: none;
+  &:focus-visible {
+    outline: 3px solid $focus;
+    outline-offset: 3px;
+    border-bottom-color: transparent;
+    border-radius: 0.25rem;
   }
 }
 
-.footerEmail {
+.footerMeta {
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.footerMetaRow {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 0.4rem;
+  align-items: baseline;
+}
+
+.footerMetaLabel,
+.footerMetaValue {
+  margin: 0;
+  color: $text-body;
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  font-weight: 400;
   overflow-wrap: anywhere;
 }
 
@@ -158,8 +192,6 @@ $edge-offset: 1.25rem;
   margin: 0;
   display: grid;
   grid-template-columns: minmax(0, 1fr) max-content;
-  justify-content: start;
-  justify-items: start;
   align-items: start;
   column-gap: clamp(1rem, 3vw, 2rem);
   row-gap: clamp(0.6rem, 2vw, 1rem);
@@ -170,47 +202,29 @@ $edge-offset: 1.25rem;
   color: $text-muted;
   font-size: clamp(0.82rem, 1vw, 0.95rem);
   max-width: 85ch;
-  justify-self: start;
 }
 
 .footerContact {
   margin: 0;
-  white-space: normal;
   font-size: clamp(0.82rem, 1vw, 0.95rem);
   color: $text-body;
   justify-self: end;
-
-  a {
-    margin-left: 0.35rem;
-    color: $text-strong;
-    text-decoration: none;
-    border-bottom: 1px dashed transparent;
-    transition: color 160ms ease, border-color 160ms ease;
-    overflow-wrap: anywhere;
-  }
-
-  a:hover,
-  a:focus-visible {
-    border-color: $text-strong;
-    outline: none;
-  }
+  white-space: normal;
 }
 
-.footerContainer a[x-apple-data-detectors],
-.footerContainer a[href^="mailto"],
-.footerContainer a[href^="tel"],
-.footerContainer a[href^="maps"] {
-  color: inherit;
-  text-decoration: none;
+.footerContactLabel {
+  color: $text-body;
+}
+
+.footerContainer a[x-apple-data-detectors] {
+  color: inherit !important;
+  text-decoration: none !important;
+  border-bottom: 0 !important;
 }
 
 @media (min-width: 90rem) {
   .footerLogo {
     max-width: clamp(3.6rem, 4.8vw, 5rem);
-  }
-
-  .footerThird {
-    grid-template-columns: minmax(0, 1fr) max-content;
   }
 }
 
@@ -240,7 +254,9 @@ $edge-offset: 1.25rem;
     font-size: clamp(0.98rem, 4.6vw, 1.1rem);
   }
 
-  .footerLine {
+  .footerLine,
+  .footerMetaLabel,
+  .footerMetaValue {
     font-size: clamp(0.92rem, 4vw, 1rem);
   }
 
@@ -250,14 +266,9 @@ $edge-offset: 1.25rem;
   }
 }
 
-@media (max-width: 30rem) {
-  .footerContainer {
-    padding-left: max($edge-offset, env(safe-area-inset-left));
-    padding-right: max($edge-offset, env(safe-area-inset-right));
-  }
-
-  .footerThird {
-    row-gap: clamp(0.75rem, 3.5vw, 1rem);
+@media (prefers-reduced-motion: reduce) {
+  .footerLink {
+    transition: none;
   }
 }
 
@@ -268,5 +279,9 @@ $edge-offset: 1.25rem;
 
   .footerDisclaimer {
     color: #e1e7ec;
+  }
+
+  .footerLink:focus-visible {
+    outline-color: rgba(255, 255, 255, 0.9);
   }
 }
