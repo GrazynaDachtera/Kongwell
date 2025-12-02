@@ -4,13 +4,14 @@
 $bg-footer: #171e23;
 
 $text-strong: #d6dde3;
-$text-body:   #b8c2cf;
-$text-muted:  #9aa7af;
+$text-body: #b8c2cf;
+$text-muted: #9aa7af;
 
 $divider: rgba(255, 255, 255, 0.12);
 
-$font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-$font-body:    "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto,
+  sans-serif;
+$font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 $edge-offset: 1.25rem;
 
@@ -24,7 +25,7 @@ $edge-offset: 1.25rem;
   margin-top: -1px;
   padding-top: clamp(1.75rem, 4vw, 2.75rem);
   padding-bottom: clamp(1.5rem, 4.5vw, 3rem);
-  padding-left:  max($edge-offset, env(safe-area-inset-left));
+  padding-left: max($edge-offset, env(safe-area-inset-left));
   padding-right: max($edge-offset, env(safe-area-inset-right));
   font-family: $font-body;
   line-height: 1.5;
@@ -36,8 +37,8 @@ $edge-offset: 1.25rem;
 }
 
 .footerInner {
-  width: min(80rem, 100%);
-  margin-inline: auto;
+  width: 100%;
+  margin-inline: 0;
   display: grid;
   grid-template-columns: clamp(5.2rem, 10vw, 6.25rem) minmax(0, 1fr);
   align-items: start;
@@ -80,9 +81,8 @@ $edge-offset: 1.25rem;
   transform: translate(-50%, -50%);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.16);
-  box-shadow:
-    0 0 0 0.25rem rgba(255, 255, 255, 0.10),
-    0 0 0 0.6rem  rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 0.25rem rgba(255, 255, 255, 0.1),
+    0 0 0 0.6rem rgba(255, 255, 255, 0.06);
   pointer-events: none;
   z-index: 0;
   opacity: 1;
@@ -141,7 +141,9 @@ $edge-offset: 1.25rem;
   }
 }
 
-.footerEmail { overflow-wrap: anywhere; }
+.footerEmail {
+  overflow-wrap: anywhere;
+}
 
 .footerRule {
   width: 100%;
@@ -152,10 +154,10 @@ $edge-offset: 1.25rem;
 }
 
 .footerThird {
-  width: min(80rem, 100%);
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(0, 1fr) max-content;
   justify-content: start;
   justify-items: start;
   align-items: start;
@@ -167,6 +169,8 @@ $edge-offset: 1.25rem;
   margin: 0;
   color: $text-muted;
   font-size: clamp(0.82rem, 1vw, 0.95rem);
+  max-width: 85ch;
+  justify-self: start;
 }
 
 .footerContact {
@@ -174,6 +178,7 @@ $edge-offset: 1.25rem;
   white-space: normal;
   font-size: clamp(0.82rem, 1vw, 0.95rem);
   color: $text-body;
+  justify-self: end;
 
   a {
     margin-left: 0.35rem;
@@ -200,34 +205,68 @@ $edge-offset: 1.25rem;
 }
 
 @media (min-width: 90rem) {
-  .footerLogo { max-width: clamp(3.6rem, 4.8vw, 5rem); }
-  .footerThird { grid-template-columns: 1fr auto; }
+  .footerLogo {
+    max-width: clamp(3.6rem, 4.8vw, 5rem);
+  }
+
+  .footerThird {
+    grid-template-columns: minmax(0, 1fr) max-content;
+  }
 }
 
 @media (max-width: 64rem) {
-  .footerInner { grid-template-columns: 1fr; gap: 1.25rem; }
+  .footerInner {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
   .footerFirst {
     justify-self: start;
     width: clamp(5.2rem, 10vw, 6.25rem);
     place-items: center;
   }
-  .footerThird { grid-template-columns: 1fr; width: min(46rem, 100%); }
+
+  .footerThird {
+    grid-template-columns: 1fr;
+  }
+
+  .footerContact {
+    justify-self: start;
+  }
 }
 
 @media (max-width: 48rem) {
-  .footerHeading { font-size: clamp(0.98rem, 4.6vw, 1.1rem); }
-  .footerLine { font-size: clamp(0.92rem, 4vw, 1rem); }
-  .footerDisclaimer, .footerContact { font-size: clamp(0.9rem, 3.8vw, 1rem); }
+  .footerHeading {
+    font-size: clamp(0.98rem, 4.6vw, 1.1rem);
+  }
+
+  .footerLine {
+    font-size: clamp(0.92rem, 4vw, 1rem);
+  }
+
+  .footerDisclaimer,
+  .footerContact {
+    font-size: clamp(0.9rem, 3.8vw, 1rem);
+  }
 }
 
 @media (max-width: 30rem) {
   .footerContainer {
-    padding-left:  max($edge-offset, env(safe-area-inset-left));
+    padding-left: max($edge-offset, env(safe-area-inset-left));
     padding-right: max($edge-offset, env(safe-area-inset-right));
   }
-  .footerThird { row-gap: clamp(0.75rem, 3.5vw, 1rem); }
+
+  .footerThird {
+    row-gap: clamp(0.75rem, 3.5vw, 1rem);
+  }
 }
+
 @media (prefers-contrast: more) {
-  .footerRule { border-top-color: rgba(255,255,255,0.25); }
-  .footerDisclaimer { color: #e1e7ec; }
+  .footerRule {
+    border-top-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .footerDisclaimer {
+    color: #e1e7ec;
+  }
 }
