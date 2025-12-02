@@ -8,7 +8,7 @@
     "export": "next export",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "gh-pages -d out"
+    "deploy": "gh-pages -d out --cname kongwell.com"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
