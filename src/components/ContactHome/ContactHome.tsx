@@ -1,37 +1,32 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import type { CSSProperties } from "react";
+import { useEffect, useId, useRef } from "react";
 import "./ContactHome.scss";
 
-type CSSVars = CSSProperties & { ["--delay"]?: string };
-
-const BASE_DELAY_S = 0.35;
-const STAGGER_S = 0.3;
+type CSSVars = React.CSSProperties & { ["--i"]?: number };
 
 export default function ContactHome() {
+  const sectionId = useId();
   const sectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const node = sectionRef.current;
     if (!node) return;
 
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduceMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)"
+    )?.matches;
 
-    if (prefersReduced) {
+    if (reduceMotion || typeof IntersectionObserver === "undefined") {
       node.classList.add("show");
       return;
     }
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          node.classList.add("show");
-          observer.unobserve(node);
-        }
+        if (!entry.isIntersecting) return;
+        node.classList.add("show");
+        observer.unobserve(node);
       },
       { threshold: 0.35, rootMargin: "0px 0px -10% 0px" }
     );
@@ -40,26 +35,24 @@ export default function ContactHome() {
     return () => observer.disconnect();
   }, []);
 
-  return (
-    <section
-      ref={sectionRef}
-      className="contactHome"
-      aria-label="Our Mission"
-      aria-labelledby="mission-title"
-      role="region"
-    >
-      <h3 id="mission-title" className="missionTitle">
-        Our Mission is simple
-      </h3>
+  const titleId = `${sectionId}-title`;
+  const textId = `${sectionId}-text`;
 
-      <h4
+  return (
+    <section ref={sectionRef} className="contactHome" aria-labelledby={titleId}>
+      <h2 id={titleId} className="missionTitle">
+        Our Mission is simple
+      </h2>
+
+      <p
+        id={textId}
         className="missionText fadeUp"
-        style={{ "--delay": `${BASE_DELAY_S + STAGGER_S}s` } as CSSVars}
+        style={{ "--i": 1 } as CSSVars}
       >
-        Deliver measurable efficiency gains to Europe’s energy markets –
+        Deliver measurable efficiency gains to Europe’s energy markets -
         quietly, responsibly, and with unwavering respect for the rules that
         keep those markets fair.
-      </h4>
+      </p>
     </section>
   );
 }

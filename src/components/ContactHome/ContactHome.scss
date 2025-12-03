@@ -7,32 +7,34 @@ $bg-top: #02070a;
 $text-strong: #cfd6df;
 $text-body: #b8c2cf;
 
-$font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto,
+  sans-serif;
 $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
-/* match About section spacing token */
 $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 
 .contactHome {
+  --base-delay: 0.35s;
+  --stagger: 0.3s;
+
   position: relative;
   isolation: isolate;
   z-index: 0;
   width: 100%;
   min-height: 50svh;
-  min-height: 50vh;
   background: radial-gradient(120% 120% at 50% 0%, $bg-top 0%, $bg-section 55%);
   color: $text-body;
 
-  /* exact same layout behaviour as About: title on top, then content with the same gap */
   display: grid;
-  place-items: start center;     /* align-items:start; justify-items:center */
-  place-content: start center;   /* prevent grid rows from stretching on tall mobile screens */
-  grid-auto-rows: max-content;   /* rows hug their content */
+  place-items: start center;
+  place-content: start center;
+  grid-auto-rows: max-content;
   gap: $title_cards_gap;
 
   text-align: center;
   padding-block: clamp(2rem, 6vw, 6rem);
-  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
+  padding-inline: max(1rem, env(safe-area-inset-left))
+    max(1rem, env(safe-area-inset-right));
   margin-top: -1px;
   border-top: 0;
   background-clip: padding-box;
@@ -68,13 +70,16 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 .fadeUp {
+  --i: 0;
+  --delay: calc(var(--base-delay) + (var(--i) * var(--stagger)));
+
   opacity: 0;
   transform: translateY(0.75rem);
   filter: blur(0.125rem);
-  transition:
-    opacity 0.6s ease var(--delay),
-    transform 0.6s ease var(--delay),
+
+  transition: opacity 0.6s ease var(--delay), transform 0.6s ease var(--delay),
     filter 0.6s ease var(--delay);
+
   will-change: transform, opacity, filter;
 }
 
@@ -85,29 +90,53 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 @media (min-width: 90rem) {
-  .missionText { max-width: 74ch; }
+  .missionText {
+    max-width: 74ch;
+  }
 }
 
 @media (max-width: 64rem) {
-  .contactHome { padding-block: clamp(1.75rem, 8vw, 3.5rem); }
-  .missionText  { font-size: clamp(0.98rem, 1.6vw, 1.08rem); line-height: 1.58; }
+  .contactHome {
+    padding-block: clamp(1.75rem, 8vw, 3.5rem);
+  }
+
+  .missionText {
+    font-size: clamp(0.98rem, 1.6vw, 1.08rem);
+    line-height: 1.58;
+  }
 }
 
 @media (max-width: 48rem) {
-  .missionText  { font-size: clamp(0.96rem, 4.2vw, 1.06rem); line-height: 1.56; }
+  .missionText {
+    font-size: clamp(0.96rem, 4.2vw, 1.06rem);
+    line-height: 1.56;
+  }
 }
 
 @media (max-width: 30rem) {
   .contactHome {
-    padding-inline: max(0.75rem, env(safe-area-inset-left)) max(0.75rem, env(safe-area-inset-right));
+    padding-inline: max(0.75rem, env(safe-area-inset-left))
+      max(0.75rem, env(safe-area-inset-right));
   }
-  .missionTitle { line-height: 1.2; }
-  .missionText  { line-height: 1.54; }
+
+  .missionTitle {
+    line-height: 1.2;
+  }
+
+  .missionText {
+    line-height: 1.54;
+  }
 }
 
 @media (orientation: landscape) and (max-height: 30rem) {
-  .contactHome { min-height: auto; padding-block: 1.25rem; }
-  .missionText { line-height: 1.5; }
+  .contactHome {
+    min-height: auto;
+    padding-block: 1.25rem;
+  }
+
+  .missionText {
+    line-height: 1.5;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
