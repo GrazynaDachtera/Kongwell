@@ -37,7 +37,7 @@ Transparent governance framework, with formal policies for risk management and p
 
 function contentToParagraphs(content: string) {
   return content
-    .split(/\n\s*\n/g) // split on blank lines
+    .split(/\n\s*\n/g)
     .map((p) => p.trim())
     .filter(Boolean);
 }
