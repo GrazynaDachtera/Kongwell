@@ -12,20 +12,27 @@ $card-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.35);
 
 $bullet-bg: rgba(52, 73, 84, 0.78);
 
-$font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+$font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto,
+  sans-serif;
 $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 
 .containerSection {
+  // DRY animation knobs (cards + bullets)
+  --base-delay: 0.3s;
+  --stagger: 0.3s;
+  --bullet-base: 0.4s;
+  --bullet-stagger: 0.4s;
+
   position: relative;
   isolation: isolate;
   z-index: 0;
   min-height: 100svh;
-  min-height: 100vh;
   width: 100%;
   padding-block: clamp(2rem, 6vw, 6rem);
-  padding-inline: max(1rem, env(safe-area-inset-left)) max(1rem, env(safe-area-inset-right));
+  padding-inline: max(1rem, env(safe-area-inset-left))
+    max(1rem, env(safe-area-inset-right));
   display: grid;
   place-items: start center;
   background: url("/AboutComponent/3image.jpg") center / cover no-repeat;
@@ -40,7 +47,11 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
     content: "";
     position: absolute;
     inset: -1px 0 0 0;
-    background: radial-gradient(120% 120% at 50% 0%, #02070a 0%, $bg-overlay 55%);
+    background: radial-gradient(
+      120% 120% at 50% 0%,
+      #02070a 0%,
+      $bg-overlay 55%
+    );
     z-index: 0;
     pointer-events: none;
     will-change: opacity;
@@ -75,18 +86,22 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 .aboutCard {
+  // index-driven delay (set inline as --i)
+  --i: 0;
+  --delay: calc(var(--base-delay) + (var(--i) * var(--stagger)));
+
   background: $card-bg;
   border: 1px solid $card-border;
   border-radius: 1rem;
   box-shadow: $card-shadow;
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
+
   opacity: 0;
   transform: translateY(0.75rem);
-  transition:
-    opacity 0.6s ease var(--delay),
-    transform 0.6s ease var(--delay),
-    box-shadow 250ms ease,
-    border-color 250ms ease;
+
+  transition: opacity 0.6s ease var(--delay), transform 0.6s ease var(--delay),
+    box-shadow 250ms ease, border-color 250ms ease;
+
   will-change: transform, opacity;
   outline: none;
   contain: layout paint style;
@@ -127,50 +142,70 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
   letter-spacing: 0.003em;
   line-height: 1.6;
   font-size: clamp(1rem, 1.4vw, 1.125rem);
-  white-space: pre-line;
   margin: 0;
   overflow-wrap: anywhere;
   hyphens: auto;
   text-wrap: pretty;
 }
 
+.cardTextGroup {
+  display: grid;
+  gap: clamp(0.6rem, 1.6vw, 0.85rem);
+}
+
 .bulletList {
+  // now a real list (ul/li) for accessibility
+  list-style: none;
+  padding: 0;
+  margin: clamp(0.75rem, 2vw, 1rem) 0 0;
+
   display: grid;
   gap: clamp(0.75rem, 1.8vw, 1rem);
-  margin-top: clamp(0.75rem, 2vw, 1rem);
 }
 
 .bulletItem {
+  // index-driven delay (set inline as --j)
+  --j: 0;
+  --bullet-delay: calc(var(--bullet-base) + (var(--j) * var(--bullet-stagger)));
+
   background: $bullet-bg;
   border: none;
   border-radius: 0.875rem;
   padding: clamp(0.75rem, 2vw, 1rem);
   box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.28);
+
   opacity: 0;
   transform: translateY(0.5rem);
-  transition: opacity 0.5s ease, transform 0.5s ease;
 
-  .bulletText {
-    margin: 0;
-    color: $text-strong;
-    font-family: $font-body;
-    font-weight: 400;
-    line-height: 1.6;
-    font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition-delay: 0s;
+}
+
+.bulletText {
+  margin: 0;
+  color: $text-strong;
+  font-family: $font-body;
+  font-weight: 400;
+  line-height: 1.6;
+  font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+}
+
+.aboutCard.show .bulletItem {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: var(--bullet-delay);
+}
+
+@media (min-width: 90rem) {
+  .cardsGrid {
+    width: min(80rem, 100%);
   }
 }
 
-.aboutCard.show .bulletItem { opacity: 1; transform: translateY(0); }
-.aboutCard.show .bulletItem:nth-child(1) { transition-delay: 0.4s; }
-.aboutCard.show .bulletItem:nth-child(2) { transition-delay: 0.8s; }
-.aboutCard.show .bulletItem:nth-child(3) { transition-delay: 1.2s; }
-
-@media (min-width: 90rem) {
-  .cardsGrid { width: min(80rem, 100%); }
-}
-
 @media (max-width: 64rem) {
-  .containerSection { padding-block: clamp(1.75rem, 8vw, 3.5rem); }
+  .containerSection {
+    padding-block: clamp(1.75rem, 8vw, 3.5rem);
+  }
 }
 
 @media (max-width: 48rem) {
@@ -179,28 +214,60 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
     padding: clamp(1rem, 5vw, 1.25rem);
     box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.28);
   }
-  .cardTitle { font-size: clamp(1.15rem, 5.2vw, 1.4rem); }
-  .cardText  { font-size: clamp(0.96rem, 4.2vw, 1.06rem); line-height: 1.58; }
-  .bulletItem { border-radius: 0.75rem; }
-  .bulletItem .bulletText { font-size: clamp(0.92rem, 3.8vw, 1rem); }
+
+  .cardTitle {
+    font-size: clamp(1.15rem, 5.2vw, 1.4rem);
+  }
+
+  .cardText {
+    font-size: clamp(0.96rem, 4.2vw, 1.06rem);
+    line-height: 1.58;
+  }
+
+  .bulletItem {
+    border-radius: 0.75rem;
+  }
+
+  .bulletText {
+    font-size: clamp(0.92rem, 3.8vw, 1rem);
+  }
 }
 
 @media (max-width: 30rem) {
-  .containerSection { padding-inline: max(0.75rem, env(safe-area-inset-left)) max(0.75rem, env(safe-area-inset-right)); }
-  .cardsGrid { gap: 0.875rem; }
-  .cardText { line-height: 1.55; }
+  .containerSection {
+    padding-inline: max(0.75rem, env(safe-area-inset-left))
+      max(0.75rem, env(safe-area-inset-right));
+  }
+
+  .cardsGrid {
+    gap: 0.875rem;
+  }
+
+  .cardText {
+    line-height: 1.55;
+  }
 }
 
 @media (orientation: landscape) and (max-height: 30rem) {
-  .containerSection { min-height: auto; padding-block: 1.25rem; }
-  .cardsGrid { gap: 0.75rem; }
-  .aboutCard { padding: 0.9rem; }
+  .containerSection {
+    min-height: auto;
+    padding-block: 1.25rem;
+  }
+
+  .cardsGrid {
+    gap: 0.75rem;
+  }
+
+  .aboutCard {
+    padding: 0.9rem;
+  }
 }
 
 @media (pointer: coarse) {
   .aboutCard {
     transform: none;
   }
+
   .aboutCard:hover,
   .aboutCard:focus-within {
     transform: none;

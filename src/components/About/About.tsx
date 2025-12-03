@@ -1,20 +1,20 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import type { CSSProperties } from "react";
+import { useEffect, useId, useRef } from "react";
 import "./About.scss";
 
 type Milestone =
-  | { title: string; intro: string; bullets: string[] }
-  | { title: string; content: string };
+  | { kind: "bullets"; title: string; intro: string; bullets: string[] }
+  | { kind: "content"; title: string; content: string };
 
-type CSSVars = CSSProperties & { ["--delay"]?: string };
+type CSSVars = React.CSSProperties & {
+  ["--i"]?: number;
+  ["--j"]?: number;
+};
 
-const BASE_DELAY_S = 0.3;
-const STAGGER_S = 0.3;
-
-const milestones: Milestone[] = [
+const milestones: readonly Milestone[] = [
   {
+    kind: "bullets",
     title: "Why it matters",
     intro:
       "Efficient, transparent pricing is essential to the smooth functioning of Europe’s energy ecosystem. Our strategies support the objectives of REMIT by:",
@@ -25,93 +25,122 @@ const milestones: Milestone[] = [
     ],
   },
   {
+    kind: "content",
     title: "How we operate",
-    content: `100 % proprietary capital - no external investors or clients.
+    content: `100% proprietary capital - no external investors or clients.
 
 Sophisticated simulations and back-testing ensure stability and safety of our strategies, even in volatile markets.
 
 Transparent governance framework, with formal policies for risk management and purely algorithmic trading, all ACER-compliant.`,
   },
-];
+] as const;
+
+function contentToParagraphs(content: string) {
+  return content
+    .split(/\n\s*\n/g) // split on blank lines
+    .map((p) => p.trim())
+    .filter(Boolean);
+}
 
 export default function About() {
-  const refs = useRef<HTMLDivElement[]>([]);
+  const sectionId = useId();
+  const sectionRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    const elements = refs.current.filter(Boolean);
-    if (!elements.length) return;
+    const root = sectionRef.current;
+    if (!root) return;
 
-    const prefersReduced =
-      typeof window !== "undefined" &&
-      window.matchMedia &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const cards = Array.from(
+      root.querySelectorAll<HTMLElement>('[data-reveal="card"]')
+    );
+    if (!cards.length) return;
 
-    if (prefersReduced) {
-      elements.forEach((el) => el.classList.add("show"));
+    const reduceMotion = window.matchMedia?.(
+      "(prefers-reduced-motion: reduce)"
+    )?.matches;
+
+    if (reduceMotion || typeof IntersectionObserver === "undefined") {
+      cards.forEach((el) => el.classList.add("show"));
       return;
     }
 
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-            observer.unobserve(entry.target);
-          }
-        });
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const el = entry.target as HTMLElement;
+          el.classList.add("show");
+          observer.unobserve(el);
+        }
       },
       { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
     );
 
-    elements.forEach((el) => observer.observe(el));
+    cards.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
-  const styleWithDelay = (i: number): CSSVars => ({
-    "--delay": `${BASE_DELAY_S + i * STAGGER_S}s`,
-  });
+  const titleId = `${sectionId}-title`;
 
   return (
     <section
+      ref={sectionRef}
       className="containerSection"
-      aria-label="Powering Transparent Markets"
-      aria-labelledby="transparent-markets-title"
-      role="region"
+      aria-labelledby={titleId}
     >
-      <h3 id="transparent-markets-title" className="sectionTitle">
+      <h2 id={titleId} className="sectionTitle">
         Powering Transparent Markets
-      </h3>
+      </h2>
 
       <div className="cardsGrid">
-        {milestones.map((m, i) => (
-          <div
-            key={m.title}
-            className="aboutCard"
-            style={styleWithDelay(i)}
-            ref={(el) => {
-              if (el) refs.current[i] = el;
-            }}
-            tabIndex={0}
-            aria-label={m.title}
-          >
-            <h2 className="cardTitle">{m.title}</h2>
+        {milestones.map((m, i) => {
+          const cardTitleId = `${sectionId}-card-${i}-title`;
+          const cardBodyId = `${sectionId}-card-${i}-body`;
 
-            {"bullets" in m ? (
-              <>
-                <p className="cardText">{m.intro}</p>
-                <div className="bulletList">
-                  {m.bullets.map((text, j) => (
-                    <div key={j} className="bulletItem">
-                      <p className="bulletText">{text}</p>
-                    </div>
+          return (
+            <article
+              key={m.title}
+              className="aboutCard"
+              data-reveal="card"
+              style={{ "--i": i } as CSSVars}
+              aria-labelledby={cardTitleId}
+              aria-describedby={cardBodyId}
+              tabIndex={0}
+            >
+              <h3 id={cardTitleId} className="cardTitle">
+                {m.title}
+              </h3>
+
+              {m.kind === "bullets" ? (
+                <>
+                  <p id={cardBodyId} className="cardText">
+                    {m.intro}
+                  </p>
+
+                  <ul className="bulletList">
+                    {m.bullets.map((text, j) => (
+                      <li
+                        key={`${j}-${text.slice(0, 24)}`}
+                        className="bulletItem"
+                        style={{ "--j": j } as CSSVars}
+                      >
+                        <p className="bulletText">{text}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <div id={cardBodyId} className="cardTextGroup">
+                  {contentToParagraphs(m.content).map((p, idx) => (
+                    <p key={idx} className="cardText">
+                      {p}
+                    </p>
                   ))}
                 </div>
-              </>
-            ) : (
-              <p className="cardText">{m.content}</p>
-            )}
-          </div>
-        ))}
+              )}
+            </article>
+          );
+        })}
       </div>
     </section>
   );
