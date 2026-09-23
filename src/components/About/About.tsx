@@ -33,7 +33,7 @@ const milestones: readonly Milestone[] = [
   {
     kind: "content",
     title: "How we operate",
-    content: `100% proprietary capital – no external investors or clients.
+    content: `100% proprietary capital - no external investors or clients.
 
 Sophisticated simulations and back-testing ensure stability and safety of our strategies, even in volatile markets.
 
@@ -82,7 +82,7 @@ export default function About() {
                     {m.bullets.map(({ lead, text }) => (
                       <li key={lead} className="bulletItem">
                         <p className="bulletText">
-                          <strong>{lead}</strong> – {text}
+                          <strong>{lead}</strong> - {text}
                         </p>
                       </li>
                     ))}

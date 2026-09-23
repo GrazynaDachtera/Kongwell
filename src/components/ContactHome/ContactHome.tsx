@@ -18,7 +18,7 @@ export default function ContactHome() {
         data-reveal="scroll"
         style={{ "--reveal-order": 1 } as RevealStyle}
       >
-        Deliver measurable efficiency gains to Europe’s energy markets –
+        Deliver measurable efficiency gains to Europe’s energy markets -
         quietly, responsibly, and with unwavering respect for the rules that
         keep those markets fair.
       </p>

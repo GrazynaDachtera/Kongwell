@@ -18,7 +18,7 @@ const slides: readonly Slide[] = [
         record that spans multiple asset classes. Our collective background in
         quantitative research, exchange technology, and risk management lets us
         approach energy markets with the same rigour typically reserved for
-        global macro desks – only applied to the nuanced dynamics of power
+        global macro desks - only applied to the nuanced dynamics of power
         markets.
       </>,
     ],
