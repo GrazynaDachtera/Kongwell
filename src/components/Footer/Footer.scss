@@ -174,7 +174,7 @@ $edge-offset: 1.25rem;
   color: $text-body;
   font-size: clamp(0.88rem, 1vw, 0.98rem);
   font-weight: 400;
-  overflow-wrap: anywhere;
+  white-space: nowrap; /* never split "ACER" or an ID number */
 }
 
 .footerRule {

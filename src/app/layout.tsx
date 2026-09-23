@@ -9,6 +9,8 @@ import Logo from "../components/Logo/Logo";
 export const metadata: Metadata = {
   title: "Kongwell.com",
   description: "Kongwell Energy Trading",
+  // Stop iOS turning the NIP/KRS numbers in the footer into phone links.
+  formatDetection: { telephone: false },
 };
 
 export default function RootLayout({
