@@ -11,14 +11,10 @@ $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 
 .contactHome {
-  --base-delay: 0.35s;
-  --stagger: 0.3s;
-
   position: relative;
   isolation: isolate;
   z-index: 0;
   width: 100%;
-  min-height: 50svh;
   background: radial-gradient(120% 120% at 50% 0%, $bg-top 0%, $bg-section 55%);
   color: $text-body;
 
@@ -60,30 +56,8 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
   letter-spacing: 0.003em;
   line-height: 1.6;
   font-size: clamp(1rem, 1.4vw, 1.125rem);
-  white-space: normal;
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  overflow-wrap: break-word;
   text-wrap: pretty;
-}
-
-.fadeUp {
-  --i: 0;
-  --delay: calc(var(--base-delay) + (var(--i) * var(--stagger)));
-
-  opacity: 0;
-  transform: translateY(0.75rem);
-  filter: blur(0.125rem);
-
-  transition: opacity 0.6s ease var(--delay), transform 0.6s ease var(--delay),
-    filter 0.6s ease var(--delay);
-
-  will-change: transform, opacity, filter;
-}
-
-.contactHome.show .fadeUp {
-  opacity: 1;
-  transform: translateY(0);
-  filter: blur(0);
 }
 
 @media (min-width: 90rem) {
@@ -133,14 +107,5 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 
   .missionText {
     line-height: 1.5;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .fadeUp {
-    transition: none !important;
-    transform: none !important;
-    filter: none !important;
-    opacity: 1 !important;
   }
 }

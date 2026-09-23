@@ -1,16 +1,13 @@
-"use client";
-
-import { useEffect, useId, useRef } from "react";
+import type { CSSProperties } from "react";
 import "./About.scss";
 
-type Milestone =
-  | { kind: "bullets"; title: string; intro: string; bullets: string[] }
-  | { kind: "content"; title: string; content: string };
+type RevealStyle = CSSProperties & { ["--reveal-order"]?: number };
 
-type CSSVars = React.CSSProperties & {
-  ["--i"]?: number;
-  ["--j"]?: number;
-};
+type Bullet = { lead: string; text: string };
+
+type Milestone =
+  | { kind: "bullets"; title: string; intro: string; bullets: Bullet[] }
+  | { kind: "content"; title: string; content: string };
 
 const milestones: readonly Milestone[] = [
   {
@@ -19,15 +16,24 @@ const milestones: readonly Milestone[] = [
     intro:
       "Efficient, transparent pricing is essential to the smooth functioning of Europe’s energy ecosystem. Our strategies support the objectives of REMIT by:",
     bullets: [
-      "Enhancing liquidity - Our disciplined, price-sensitive order flow converts passive quotes into executed trades, prompting market makers to refresh prices and supporting tighter spreads and deeper order books.",
-      "Accelerating price discovery - By swiftly lifting and hitting out-of-line quotes we transmit information across venues, aligning prices with underlying fundamentals.",
-      "Reducing systemic risk - Robust pre-trade limits, kill-switches, and real-time surveillance keep our activity safe and orderly.",
+      {
+        lead: "Enhancing liquidity",
+        text: "our disciplined, price-sensitive order flow converts passive quotes into executed trades, prompting market makers to refresh prices and supporting tighter spreads and deeper order books.",
+      },
+      {
+        lead: "Accelerating price discovery",
+        text: "by swiftly lifting and hitting out-of-line quotes we transmit information across venues, aligning prices with underlying fundamentals.",
+      },
+      {
+        lead: "Reducing systemic risk",
+        text: "robust pre-trade limits, kill-switches, and real-time surveillance keep our activity safe and orderly.",
+      },
     ],
   },
   {
     kind: "content",
     title: "How we operate",
-    content: `100% proprietary capital - no external investors or clients.
+    content: `100% proprietary capital – no external investors or clients.
 
 Sophisticated simulations and back-testing ensure stability and safety of our strategies, even in volatile markets.
 
@@ -42,70 +48,27 @@ function contentToParagraphs(content: string) {
     .filter(Boolean);
 }
 
+const TITLE_ID = "transparent-markets-title";
+
+/* Entrance animation: data-reveal="scroll" (see app/home.scss). */
 export default function About() {
-  const sectionId = useId();
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    const root = sectionRef.current;
-    if (!root) return;
-
-    const cards = Array.from(
-      root.querySelectorAll<HTMLElement>('[data-reveal="card"]')
-    );
-    if (!cards.length) return;
-
-    const reduceMotion = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)"
-    )?.matches;
-
-    if (reduceMotion || typeof IntersectionObserver === "undefined") {
-      cards.forEach((el) => el.classList.add("show"));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const el = entry.target as HTMLElement;
-          el.classList.add("show");
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.3, rootMargin: "0px 0px -10% 0px" }
-    );
-
-    cards.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
-  const titleId = `${sectionId}-title`;
-
   return (
-    <section
-      ref={sectionRef}
-      className="containerSection"
-      aria-labelledby={titleId}
-    >
-      <h2 id={titleId} className="sectionTitle">
-        Powering Transparent Markets
+    <section className="containerSection" aria-labelledby={TITLE_ID}>
+      <h2 id={TITLE_ID} className="sectionTitle" data-reveal="scroll">
+        Powering transparent markets
       </h2>
 
       <div className="cardsGrid">
         {milestones.map((m, i) => {
-          const cardTitleId = `${sectionId}-card-${i}-title`;
-          const cardBodyId = `${sectionId}-card-${i}-body`;
+          const cardTitleId = `transparent-markets-card-${i}-title`;
 
           return (
             <article
               key={m.title}
               className="aboutCard"
-              data-reveal="card"
-              style={{ "--i": i } as CSSVars}
+              data-reveal="scroll"
+              style={{ "--reveal-order": i + 1 } as RevealStyle}
               aria-labelledby={cardTitleId}
-              aria-describedby={cardBodyId}
-              tabIndex={0}
             >
               <h3 id={cardTitleId} className="cardTitle">
                 {m.title}
@@ -113,24 +76,20 @@ export default function About() {
 
               {m.kind === "bullets" ? (
                 <>
-                  <p id={cardBodyId} className="cardText">
-                    {m.intro}
-                  </p>
+                  <p className="cardText">{m.intro}</p>
 
                   <ul className="bulletList">
-                    {m.bullets.map((text, j) => (
-                      <li
-                        key={`${j}-${text.slice(0, 24)}`}
-                        className="bulletItem"
-                        style={{ "--j": j } as CSSVars}
-                      >
-                        <p className="bulletText">{text}</p>
+                    {m.bullets.map(({ lead, text }) => (
+                      <li key={lead} className="bulletItem">
+                        <p className="bulletText">
+                          <strong>{lead}</strong> – {text}
+                        </p>
                       </li>
                     ))}
                   </ul>
                 </>
               ) : (
-                <div id={cardBodyId} className="cardTextGroup">
+                <div className="cardTextGroup">
                   {contentToParagraphs(m.content).map((p, idx) => (
                     <p key={idx} className="cardText">
                       {p}

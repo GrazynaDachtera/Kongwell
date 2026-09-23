@@ -1,55 +1,24 @@
-"use client";
-
-import { useEffect, useId, useRef } from "react";
+import type { CSSProperties } from "react";
 import "./ContactHome.scss";
 
-type CSSVars = React.CSSProperties & { ["--i"]?: number };
+type RevealStyle = CSSProperties & { ["--reveal-order"]?: number };
 
+const TITLE_ID = "mission-title";
+
+/* Entrance animation: data-reveal="scroll" (see app/home.scss). */
 export default function ContactHome() {
-  const sectionId = useId();
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    const node = sectionRef.current;
-    if (!node) return;
-
-    const reduceMotion = window.matchMedia?.(
-      "(prefers-reduced-motion: reduce)"
-    )?.matches;
-
-    if (reduceMotion || typeof IntersectionObserver === "undefined") {
-      node.classList.add("show");
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry.isIntersecting) return;
-        node.classList.add("show");
-        observer.unobserve(node);
-      },
-      { threshold: 0.35, rootMargin: "0px 0px -10% 0px" }
-    );
-
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  const titleId = `${sectionId}-title`;
-  const textId = `${sectionId}-text`;
-
   return (
-    <section ref={sectionRef} className="contactHome" aria-labelledby={titleId}>
-      <h2 id={titleId} className="missionTitle">
-        Our Mission is simple
+    <section className="contactHome" aria-labelledby={TITLE_ID}>
+      <h2 id={TITLE_ID} className="missionTitle" data-reveal="scroll">
+        Our mission is simple
       </h2>
 
       <p
-        id={textId}
-        className="missionText fadeUp"
-        style={{ "--i": 1 } as CSSVars}
+        className="missionText"
+        data-reveal="scroll"
+        style={{ "--reveal-order": 1 } as RevealStyle}
       >
-        Deliver measurable efficiency gains to Europe’s energy markets -
+        Deliver measurable efficiency gains to Europe’s energy markets –
         quietly, responsibly, and with unwavering respect for the rules that
         keep those markets fair.
       </p>

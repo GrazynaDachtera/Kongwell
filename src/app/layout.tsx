@@ -5,6 +5,7 @@ import "typeface-poppins";
 import "./home.scss";
 import type { Metadata } from "next";
 import Logo from "../components/Logo/Logo";
+import RevealObserver from "../components/Reveal/RevealObserver";
 
 export const metadata: Metadata = {
   title: "Kongwell.com",
@@ -23,6 +24,12 @@ export default function RootLayout({
       <body>
         <Logo />
         {children}
+        <RevealObserver />
+        {/* Without JavaScript nothing would reveal the sections, so show them. */}
+        <noscript>
+          {/* Unquoted attribute value: React would escape quotes inside <style>. */}
+          <style>{"[data-reveal=scroll] { opacity: 1 !important; }"}</style>
+        </noscript>
       </body>
     </html>
   );

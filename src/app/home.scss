@@ -23,6 +23,42 @@ body {
   overflow-x: hidden;
 }
 
+/* ---------- Entrance animation shared by every section ----------
+   data-reveal="load":   plays on page load (hero), no JavaScript needed.
+   data-reveal="scroll": hidden until RevealObserver adds .is-visible.
+   --reveal-order staggers items inside a section (0, 1, 2 …).
+   An animation (not a transition) so the delay never slows hover effects. */
+:root {
+  --reveal-duration: 600ms;
+  --reveal-distance: 0.75rem;
+  --reveal-stagger: 120ms;
+  --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(var(--reveal-distance));
+  }
+}
+
+[data-reveal="load"],
+[data-reveal="scroll"].is-visible {
+  animation: reveal var(--reveal-duration) var(--reveal-ease)
+    calc(var(--reveal-order, 0) * var(--reveal-stagger)) backwards;
+}
+
+[data-reveal="scroll"]:not(.is-visible) {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
+
 #__next {
   display: flex;
   flex-direction: column;

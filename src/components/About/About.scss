@@ -2,10 +2,10 @@ $bg-overlay: #000203;
 $text-strong: #cfd6df;
 $text-body: #b8c2cf;
 
+/* Card look, sizes and spacing match .sliderCard in Slider.scss. */
 $card-bg: rgba(10, 20, 22, 0.9);
 $card-border: rgba(255, 255, 255, 0.06);
 $card-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35);
-$card-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.35);
 
 $bullet-bg: rgba(52, 73, 84, 0.78);
 
@@ -16,27 +16,18 @@ $font-body: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 
 .containerSection {
-  --base-delay: 0.3s;
-  --stagger: 0.3s;
-  --bullet-base: 0.4s;
-  --bullet-stagger: 0.4s;
-
   position: relative;
   isolation: isolate;
   z-index: 0;
-  min-height: 100svh;
   width: 100%;
   padding-block: clamp(2rem, 6vw, 6rem);
   padding-inline: max(1rem, env(safe-area-inset-left))
     max(1rem, env(safe-area-inset-right));
   display: grid;
   place-items: start center;
-  background: url("/AboutComponent/3image.webp") center / cover no-repeat;
   background-color: $bg-overlay;
   margin-top: -1px;
   border-top: 0;
-  background-clip: padding-box;
-  box-shadow: none;
   overflow: hidden;
 
   &::before {
@@ -50,8 +41,6 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
     );
     z-index: 0;
     pointer-events: none;
-    will-change: opacity;
-    backface-visibility: hidden;
   }
 
   > * {
@@ -81,41 +70,19 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
   align-items: start;
 }
 
+/* Entrance animation comes from data-reveal (app/home.scss). */
 .aboutCard {
-  --i: 0;
-  --delay: calc(var(--base-delay) + (var(--i) * var(--stagger)));
-
   background: $card-bg;
   border: 1px solid $card-border;
   border-radius: 1rem;
   box-shadow: $card-shadow;
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  transition: transform 250ms ease, box-shadow 250ms ease,
+    border-color 250ms ease;
 
-  opacity: 0;
-  transform: translateY(0.75rem);
-
-  transition: opacity 0.6s ease var(--delay), transform 0.6s ease var(--delay),
-    box-shadow 250ms ease, border-color 250ms ease;
-
-  will-change: transform, opacity;
-  outline: none;
-  contain: layout paint style;
-
-  &.show {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  &:hover,
-  &:focus-within {
+  &:hover {
     transform: translateY(-0.25rem);
-    box-shadow: $card-shadow-lg;
     border-color: rgba(255, 255, 255, 0.12);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 0.125rem rgba(255, 255, 255, 0.2), $card-shadow-lg;
-    border-color: rgba(255, 255, 255, 0.22);
   }
 }
 
@@ -138,8 +105,7 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
   line-height: 1.6;
   font-size: clamp(1rem, 1.4vw, 1.125rem);
   margin: 0;
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  overflow-wrap: break-word;
   text-wrap: pretty;
 }
 
@@ -158,20 +124,11 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 .bulletItem {
-  --j: 0;
-  --bullet-delay: calc(var(--bullet-base) + (var(--j) * var(--bullet-stagger)));
-
   background: $bullet-bg;
   border: none;
   border-radius: 0.875rem;
   padding: clamp(0.75rem, 2vw, 1rem);
   box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.28);
-
-  opacity: 0;
-  transform: translateY(0.5rem);
-
-  transition: opacity 0.5s ease, transform 0.5s ease;
-  transition-delay: 0s;
 }
 
 .bulletText {
@@ -181,12 +138,12 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
   font-weight: 400;
   line-height: 1.6;
   font-size: clamp(0.95rem, 1.3vw, 1.05rem);
-}
+  overflow-wrap: break-word;
+  text-wrap: pretty;
 
-.aboutCard.show .bulletItem {
-  opacity: 1;
-  transform: translateY(0);
-  transition-delay: var(--bullet-delay);
+  strong {
+    font-weight: 600;
+  }
 }
 
 @media (min-width: 90rem) {
@@ -243,7 +200,6 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 
 @media (orientation: landscape) and (max-height: 30rem) {
   .containerSection {
-    min-height: auto;
     padding-block: 1.25rem;
   }
 
@@ -256,13 +212,9 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
   }
 }
 
+/* No hover lift on touch screens (a tap would leave the card lifted). */
 @media (pointer: coarse) {
-  .aboutCard {
-    transform: none;
-  }
-
-  .aboutCard:hover,
-  .aboutCard:focus-within {
+  .aboutCard:hover {
     transform: none;
   }
 }
@@ -275,10 +227,7 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .aboutCard,
-  .bulletItem {
-    transition: none !important;
-    transform: none !important;
-    opacity: 1 !important;
+  .aboutCard {
+    transition: none;
   }
 }

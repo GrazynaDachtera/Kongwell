@@ -1,25 +1,26 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import type { CSSProperties } from "react";
 import "./Header.scss";
 
+type RevealStyle = CSSProperties & { ["--reveal-order"]?: number };
+
+/* Entrance plays on page load in pure CSS (data-reveal="load", see
+   app/home.scss), so the headline never waits for JavaScript. */
 const Header: React.FC = () => {
-  const [animate, setAnimate] = useState(false);
-
-  useEffect(() => {
-    const id = setTimeout(() => setAnimate(true), 10);
-    return () => clearTimeout(id);
-  }, []);
-
   return (
     <header
       className="KongwellHeader"
       aria-label="Kongwell Energy Trading"
       role="banner"
     >
-      <div className={`content ${animate ? "animate" : ""}`}>
-        <h1 className="title fade-up">Kongwell Energy Trading</h1>
-        <p className="description fade-up">
+      <div className="content">
+        <h1 className="title" data-reveal="load">
+          Kongwell Energy Trading
+        </h1>
+        <p
+          className="description"
+          data-reveal="load"
+          style={{ "--reveal-order": 1 } as RevealStyle}
+        >
           Driving liquidity and efficiency in European energy markets.
         </p>
       </div>

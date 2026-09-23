@@ -4,25 +4,22 @@ $bg-top: #02070a;
 $text-strong: #cfd6df;
 $text-body: #b8c2cf;
 
+/* Card look, sizes and spacing match .aboutCard in About.scss. */
 $card-bg: rgba(10, 20, 22, 0.9);
 $card-border: rgba(255, 255, 255, 0.06);
-$card-shadow-sm: 0 0.75rem 2rem rgba(0, 0, 0, 0.28);
-$card-shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.35);
+$card-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.35);
 
 $font-heading: "Outfit Variable", system-ui, -apple-system, "Segoe UI", Roboto,
   "Inter Variable", sans-serif;
 $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 .kongwellSlider {
-  --base-delay: 0s;
-  --stagger: 0.3s;
-
   position: relative;
   isolation: isolate;
   z-index: 0;
   width: 100%;
   background: radial-gradient(120% 120% at 50% 0%, $bg-top 0%, $bg-section 55%);
-  padding-block: clamp(2.25rem, 7vw, 6rem);
+  padding-block: clamp(2rem, 6vw, 6rem);
   padding-inline: max(1rem, env(safe-area-inset-left))
     max(1rem, env(safe-area-inset-right));
   margin-top: -1px;
@@ -61,52 +58,26 @@ $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   z-index: 1;
   width: min(72rem, 100%);
   margin-inline: auto;
-  padding-inline: clamp(0.75rem, 4vw, 2rem);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(22rem, 100%), 1fr));
   gap: clamp(1rem, 3vw, 2rem);
   align-items: start;
 }
 
+/* Entrance animation comes from data-reveal (app/home.scss). */
 .sliderCard {
-  --i: 0;
-  --delay: calc(var(--base-delay) + (var(--i) * var(--stagger)));
-
   background: $card-bg;
   color: $text-body;
   border: 0.0625rem solid $card-border;
   border-radius: 1rem;
-  padding: clamp(1.1rem, 2.4vw, 1.6rem);
-  box-shadow: $card-shadow-sm;
-
-  transform: translateY(0.75rem);
-  opacity: 0;
-  filter: blur(0.125rem);
-
-  transition: opacity 0.6s ease var(--delay), transform 0.6s ease var(--delay),
-    filter 0.6s ease var(--delay), box-shadow 250ms ease,
+  padding: clamp(1.25rem, 2.5vw, 1.75rem);
+  box-shadow: $card-shadow;
+  transition: transform 250ms ease, box-shadow 250ms ease,
     border-color 250ms ease;
 
-  will-change: transform, opacity, filter;
-  outline: none;
-  contain: layout paint style;
-
-  &.show {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-
-  &:hover,
-  &:focus-within {
+  &:hover {
     transform: translateY(-0.25rem);
-    box-shadow: $card-shadow-lg;
     border-color: rgba(255, 255, 255, 0.12);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 0.125rem rgba(255, 255, 255, 0.2), $card-shadow-lg;
-    border-color: rgba(255, 255, 255, 0.22);
   }
 }
 
@@ -116,7 +87,7 @@ $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-weight: 750;
   letter-spacing: -0.01em;
   line-height: 1.14;
-  font-size: clamp(1.15rem, 2.1vw, 1.5rem);
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
   margin: 0 0 0.75rem 0;
   text-wrap: balance;
 }
@@ -132,11 +103,10 @@ $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   font-weight: 400;
   letter-spacing: 0.003em;
   line-height: 1.6;
-  font-size: clamp(0.98rem, 1.35vw, 1.1rem);
+  font-size: clamp(1rem, 1.4vw, 1.125rem);
   margin: 0;
-  max-width: 62ch;
-  overflow-wrap: anywhere;
-  hyphens: auto;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
 
   strong {
     color: $text-strong;
@@ -152,19 +122,19 @@ $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 @media (max-width: 64rem) {
   .kongwellSlider {
-    padding-block: clamp(2rem, 8vw, 3.5rem);
+    padding-block: clamp(1.75rem, 8vw, 3.5rem);
   }
 }
 
 @media (max-width: 48rem) {
   .sliderCard {
     border-radius: 0.875rem;
-    padding: clamp(0.95rem, 5vw, 1.25rem);
+    padding: clamp(1rem, 5vw, 1.25rem);
     box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 0.28);
   }
 
   .sliderTitle {
-    font-size: clamp(1.05rem, 5.2vw, 1.35rem);
+    font-size: clamp(1.15rem, 5.2vw, 1.4rem);
   }
 
   .sliderText {
@@ -181,11 +151,6 @@ $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   .sliderGrid {
     gap: 0.875rem;
-    padding-inline: 0.75rem;
-  }
-
-  .sliderCard {
-    border-radius: 0.75rem;
   }
 
   .sliderText {
@@ -207,13 +172,9 @@ $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   }
 }
 
+/* No hover lift on touch screens (a tap would leave the card lifted). */
 @media (pointer: coarse) {
-  .sliderCard {
-    transform: none;
-  }
-
-  .sliderCard:hover,
-  .sliderCard:focus-within {
+  .sliderCard:hover {
     transform: none;
   }
 }
@@ -227,9 +188,6 @@ $font-desc: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
 @media (prefers-reduced-motion: reduce) {
   .sliderCard {
-    transition: none !important;
-    transform: none !important;
-    filter: none !important;
-    opacity: 1 !important;
+    transition: none;
   }
 }
