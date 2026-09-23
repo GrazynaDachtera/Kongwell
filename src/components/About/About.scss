@@ -1,6 +1,3 @@
-@import "@fontsource-variable/outfit";
-@import "typeface-poppins";
-
 $bg-overlay: #000203;
 $text-strong: #cfd6df;
 $text-body: #b8c2cf;
@@ -34,7 +31,7 @@ $title_cards_gap: clamp(1.25rem, 3vw, 2rem);
     max(1rem, env(safe-area-inset-right));
   display: grid;
   place-items: start center;
-  background: url("/AboutComponent/3image.jpg") center / cover no-repeat;
+  background: url("/AboutComponent/3image.webp") center / cover no-repeat;
   background-color: $bg-overlay;
   margin-top: -1px;
   border-top: 0;

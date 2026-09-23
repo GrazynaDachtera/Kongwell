@@ -1,4 +1,7 @@
 // src/app/layout.tsx
+import "@fontsource-variable/outfit";
+import "@fontsource-variable/inter";
+import "typeface-poppins";
 import "./home.scss";
 import type { Metadata } from "next";
 import Logo from "../components/Logo/Logo";
