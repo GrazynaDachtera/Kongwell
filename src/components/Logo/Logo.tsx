@@ -1,17 +1,17 @@
 import Image from "next/image";
 import "./Logo.scss";
 
-/* Site logo pinned to the top-left corner of the viewport on every device.
-   Rendered once, directly inside <body> (see app/layout.tsx), so no page
-   section can affect its position. */
+/* Site logo: the footer's gorilla badge at the top-left corner of the page.
+   Rendered once, directly inside <body> (see app/layout.tsx). */
 export default function Logo() {
   return (
     <div className="siteLogo" aria-hidden="true">
       <Image
         src="/Footer/gorilla.svg"
         alt=""
-        width={58}
-        height={60}
+        width={220}
+        height={160}
+        className="siteLogoImage"
         priority
       />
     </div>

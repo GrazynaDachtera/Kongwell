@@ -1,21 +1,68 @@
-/* Pinned to the viewport: never moves when the page scrolls. */
+/* Same badge as .footerFirst / .footerLogo in Footer.scss, ~30% smaller. */
+$bg-badge: #171e23; /* footer background, so the badge looks identical over any section */
+$badge-size: clamp(3.4rem, 5.2vw, 4rem);
+$ring: 0.42rem; /* outer halo width */
+$edge-offset: 1.25rem;
+
+/* Sits at the top-left of the page and scrolls away with it. */
 .siteLogo {
-  position: fixed !important;
-  top: max(clamp(8px, 2.2vw, 20px), env(safe-area-inset-top));
-  left: max(clamp(8px, 2.2vw, 20px), env(safe-area-inset-left));
+  position: absolute;
+  top: calc(max($edge-offset, env(safe-area-inset-top)) + #{$ring});
+  left: calc(max($edge-offset, env(safe-area-inset-left)) + #{$ring});
   z-index: 4000;
-  line-height: 0;
+  display: grid;
+  place-items: center;
+  width: $badge-size;
+  height: $badge-size;
+  border-radius: 50%;
+  background: $bg-badge;
+  box-shadow: 0 0 0 $ring $bg-badge;
+  isolation: isolate;
   pointer-events: none;
   -webkit-user-select: none;
   user-select: none;
-  /* Own compositing layer: stays put during fast/momentum scrolling. */
-  transform: translateZ(0);
-  backface-visibility: hidden;
+}
 
-  img {
-    display: block;
-    height: auto;
-    max-width: none; /* allow Next's width/height to apply exactly */
-    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+/* Subtle noise texture */
+.siteLogo::before {
+  content: "";
+  position: absolute;
+  inset: 0.2rem;
+  border-radius: 50%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='64' height='64' filter='url(%23n)' opacity='0.04'/></svg>");
+  background-size: 96px 96px;
+  background-repeat: repeat;
+  mix-blend-mode: soft-light;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* Light disc and outer rings */
+.siteLogo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 0 0 0.18rem rgba(255, 255, 255, 0.1),
+    0 0 0 $ring rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.siteLogoImage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  max-width: clamp(2.2rem, 3.9vw, 2.9rem);
+  opacity: 0.98;
+  filter: drop-shadow(0 7px 18px rgba(0, 0, 0, 0.45));
+}
+
+@media (min-width: 90rem) {
+  .siteLogoImage {
+    max-width: clamp(2.5rem, 3.4vw, 3.5rem);
   }
 }

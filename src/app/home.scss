@@ -37,7 +37,7 @@ html {
 }
 
 /* Only on body, so it propagates to the viewport and the window stays the
-   scroller — keeps fixed elements (the logo) pinned, incl. iOS Safari. */
+   scroller (fixed elements stay pinned, incl. iOS Safari). */
 body {
   overflow-x: hidden;
 }
