@@ -1,0 +1,21 @@
+/* Pinned to the viewport: never moves when the page scrolls. */
+.siteLogo {
+  position: fixed !important;
+  top: max(clamp(8px, 2.2vw, 20px), env(safe-area-inset-top));
+  left: max(clamp(8px, 2.2vw, 20px), env(safe-area-inset-left));
+  z-index: 4000;
+  line-height: 0;
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /* Own compositing layer: stays put during fast/momentum scrolling. */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+
+  img {
+    display: block;
+    height: auto;
+    max-width: none; /* allow Next's width/height to apply exactly */
+    filter: drop-shadow(0 6px 20px rgba(0, 0, 0, 0.45));
+  }
+}

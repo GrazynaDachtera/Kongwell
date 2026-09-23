@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 import "./home.scss";
 import type { Metadata } from "next";
-import Image from "next/image";
+import Logo from "../components/Logo/Logo";
 
 export const metadata: Metadata = {
   title: "Kongwell.com",
@@ -16,15 +16,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="cornerBrand" aria-hidden="true">
-          <Image
-            src="/Footer/gorilla.svg"
-            alt=""
-            width={58}
-            height={60}
-            priority
-          />
-        </div>
+        <Logo />
         {children}
       </body>
     </html>
