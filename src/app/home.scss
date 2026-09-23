@@ -133,6 +133,32 @@ main {
   backface-visibility: hidden;
 }
 
+/* Phones (portrait): trim the empty sky at the top of the hero so it is
+   shorter. The photo, its gradient and the headline all move up by
+   --hero-cut together (like scrolling the page a little), and the hero
+   gets that much shorter; the logo stays in the top-left corner. */
+@media (max-width: 40rem) and (orientation: portrait) {
+  .BackgroundImage {
+    --hero-cut: 13vh;
+    min-height: calc(90vh - var(--hero-cut));
+  }
+
+  .BackgroundImage__img {
+    top: calc(-1 * var(--hero-cut));
+    height: calc(100% + var(--hero-cut));
+  }
+
+  .BackgroundImage::after {
+    top: calc(-1 * var(--hero-cut));
+  }
+
+  /* The header is centred in the hero: shrinking the hero lifts it by half
+     the cut, this negative margin lifts it by the rest. */
+  .BackgroundImage > .KongwellHeader {
+    margin-top: calc(-1 * var(--hero-cut));
+  }
+}
+
 .wrapper-navbar,
 .KongwellHeader {
   position: relative;
