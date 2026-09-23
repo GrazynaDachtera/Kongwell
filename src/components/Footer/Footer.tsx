@@ -5,7 +5,8 @@ import "./Footer.scss";
 
 const COMPANY = {
   legalName: "Kongwell Sp. z o.o.",
-  addressLine: "ul. Hoża 86/410, 00-682 Warszawa, Polska",
+  // Kept as two unbreakable parts: the line can only break between them.
+  addressLines: ["ul. Hoża 86/410,", "00-682 Warszawa, Polska"],
   email: "inquiries@kongwell.com",
 };
 
@@ -50,7 +51,10 @@ export default function Footer() {
               {COMPANY.legalName}
             </p>
 
-            <p className="footerLine">{COMPANY.addressLine}</p>
+            <p className="footerLine">
+              <span className="footerNoWrap">{COMPANY.addressLines[0]}</span>{" "}
+              <span className="footerNoWrap">{COMPANY.addressLines[1]}</span>
+            </p>
 
             <p className="footerLine">
               <a className="footerLink" href={mailto}>

@@ -49,7 +49,7 @@ $edge-offset: 1.25rem;
   margin-inline: 0;
   display: grid;
   grid-template-columns: clamp(5.2rem, 10vw, 6.25rem) minmax(0, 1fr);
-  align-items: start;
+  align-items: center; /* logo centred against the company details */
   gap: clamp(0.9rem, 2.4vw, 1.5rem);
   margin-bottom: clamp(2rem, 5vw, 3.5rem);
 }
@@ -130,9 +130,10 @@ $edge-offset: 1.25rem;
   color: $text-body;
   font-size: clamp(0.88rem, 1vw, 0.98rem);
   font-weight: 400;
-  overflow-wrap: anywhere;
-  hyphens: auto;
-  text-wrap: pretty;
+}
+
+.footerNoWrap {
+  white-space: nowrap;
 }
 
 .footerLink {
@@ -206,6 +207,9 @@ $edge-offset: 1.25rem;
   font-size: clamp(0.82rem, 1vw, 0.95rem);
   color: $text-body;
   justify-self: end;
+  /* Line up with the disclaimer's last line; plain bottom alignment as fallback. */
+  align-self: end;
+  align-self: last baseline;
   white-space: normal;
 }
 
@@ -251,10 +255,11 @@ $edge-offset: 1.25rem;
     font-size: clamp(0.98rem, 4.6vw, 1.1rem);
   }
 
+  /* Scales down on small phones so the address stays on one line from 320px up. */
   .footerLine,
   .footerMetaLabel,
   .footerMetaValue {
-    font-size: clamp(0.92rem, 4vw, 1rem);
+    font-size: clamp(0.8rem, 4vw, 1rem);
   }
 
   .footerDisclaimer,
